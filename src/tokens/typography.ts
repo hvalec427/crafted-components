@@ -113,4 +113,46 @@ export const typography = {
     lineHeight: 14,
     color: colors.textColorDark,
   } as TextStyle,
+
+  bodyReg: {
+    fontFamily: CCFontFamilies.Regular,
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textColorDark,
+  } as TextStyle,
+
+  bodyRegItalic: {
+    fontFamily: CCFontFamilies.Italic,
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textColorDark,
+  } as TextStyle,
+
+  bodySemiBold: {
+    fontFamily: CCFontFamilies.SemiBold,
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textColorDark,
+  } as TextStyle,
+
+  bodySemiBoldItalic: {
+    fontFamily: CCFontFamilies.SemiBoldItalic,
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textColorDark,
+  } as TextStyle,
+
+  h3Bold: {
+    fontFamily: CCFontFamilies.Bold,
+    fontSize: 20,
+    lineHeight: 28,
+    color: colors.textColorDark,
+  } as TextStyle,
+
+  buttonMedium: {
+    fontFamily: CCFontFamilies.SemiBold,
+    fontSize: 14,
+    lineHeight: 20,
+    color: colors.textColorDark,
+  } as TextStyle,
 } as const;

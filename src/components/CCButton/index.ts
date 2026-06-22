@@ -16,11 +16,4 @@ export { CCTextButtonConstants } from './CCTextButtonStyles';
 
 export { CCButtonGroup } from './CCButtonGroup';
 
-export { CCPressAndHoldMainButton } from './CCPressAndHoldButton';
-
 export { CCRoundButtonImage } from './CCRoundButtonImage';
-
-export { CCAaButton } from './CCAaButton';
-
-export { CCNumberOfItemsButton } from './CCNumberOfItemsButton';
-export type { CCNumberOfItemsButtonRef } from './CCNumberOfItemsButton';

@@ -4,7 +4,7 @@ import { ImageSourcePropType, ImageStyle, StyleProp, StyleSheet, ViewStyle } fro
 import colors from '../../tokens/colors.json';
 import { CCText, TextAlign } from '../CCText/CCText';
 import { CCIcon } from '../CCIcon/CCIcon';
-import { CCRow, RowProps } from '../CCLayout/CCRow';
+import { CCRow, CCRowProps } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { typography } from '../../tokens/typography';
 
@@ -64,7 +64,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
     addPadding = false,
   } = props;
 
-  let rowAlignment: RowProps['justify'];
+  let rowAlignment: CCRowProps['justify'];
   let textAlignment: TextAlign;
   switch (alignment) {
     case 'start':

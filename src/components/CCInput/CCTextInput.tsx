@@ -340,7 +340,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
     const [isFocused, setIsFocused] = useState(false);
 
     const controllerKey = useRef<string | undefined>(undefined);
-    const inputRef = useRef<TextInput>(null);
+    const inputRef = useRef<TextInput | null>(null);
     const formRef = useRef<
       | {
           focusNextInput: (currentKey?: string) => void;
@@ -571,15 +571,15 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                 isAndroid && style.inputFieldWrapperAndroid,
 
                 !multiline && isAndroid && style.inputFieldAndroidTopMargin,
-                !multiline && isAndroid && placeholderLabel && style.inputFieldAndroidPlaceholderTopMargin,
+                !multiline && isAndroid && !!placeholderLabel && style.inputFieldAndroidPlaceholderTopMargin,
 
                 multiline && isAndroid && style.inputFieldMultiLineAndroidTopMargin,
-                multiline && isAndroid && placeholderLabel && style.inputFieldMultiLineAndroidPlaceholderTopMargin,
-                multiline && isAndroid && placeholderLabel && style.inputFieldMultiLineAndroidPlaceholderBottomMargin,
+                multiline && isAndroid && !!placeholderLabel && style.inputFieldMultiLineAndroidPlaceholderTopMargin,
+                multiline && isAndroid && !!placeholderLabel && style.inputFieldMultiLineAndroidPlaceholderBottomMargin,
 
                 multiline && !isAndroid && style.inputFieldMultiLineIosBottomMargin,
-                multiline && !isAndroid && placeholderLabel && style.inputFieldMultiLineIosPlaceholderTopMargin,
-                multiline && !isAndroid && placeholderLabel && style.inputFieldMultiLineIosPlaceholderBottomMargin,
+                multiline && !isAndroid && !!placeholderLabel && style.inputFieldMultiLineIosPlaceholderTopMargin,
+                multiline && !isAndroid && !!placeholderLabel && style.inputFieldMultiLineIosPlaceholderBottomMargin,
 
                 { transform: [{ translateY: inputY }] },
               ]}>
@@ -589,6 +589,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                   inputRef.current = view;
                 }}
                 allowFontScaling={false}
+                // @ts-expect-error submitBehavior is valid in RN 0.74 but missing from bundled .d.ts
                 submitBehavior={
                   multiline
                     ? 'newline'

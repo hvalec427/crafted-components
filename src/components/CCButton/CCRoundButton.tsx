@@ -61,12 +61,12 @@ export const CCRoundButton = (props: CCRoundButtonProps) => {
         disabled={disabled}
         onPress={onPress}
         style={[
-          RoundButtonStyle[`${type}Wrapper` as keyof typeof RoundButtonStyle],
+          RoundButtonStyle[`${type}Wrapper` as keyof typeof RoundButtonStyle] as ViewStyle,
           RoundButtonSizes[`${size}` as keyof typeof RoundButtonSizes],
           disabled &&
-            RoundButtonStyle[
+            (RoundButtonStyle[
               `${type}WrapperDisabled` as keyof typeof RoundButtonStyle
-            ],
+            ] as ViewStyle),
           buttonStyle.wrapper,
           style,
         ]}>

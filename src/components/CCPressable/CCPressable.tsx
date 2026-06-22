@@ -9,7 +9,7 @@ export interface CCPressableProps {
   onPress: (() => void) | null;
   disabled?: boolean;
   children: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle> | ((pressed: boolean) => StyleProp<ViewStyle>);
   hitSlop?: {
     top?: number;
     bottom?: number;
@@ -104,7 +104,7 @@ const CCPressable = (props: CCPressableProps) => {
     <TapGestureHandler
       {...testProps(id)}
       maxDurationMs={999999}
-      onHandlerStateChange={e => {
+      onHandlerStateChange={(e: { nativeEvent: { state: number } }) => {
         handleProgress(e.nativeEvent.state);
       }}
       hitSlop={hitSlop}
