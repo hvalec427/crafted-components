@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line no-restricted-syntax
 import { StyleProp, Text, TextStyle } from 'react-native';
 
 import colors from '../../tokens/colors.json';

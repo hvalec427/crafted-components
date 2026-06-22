@@ -1,5 +1,5 @@
 import React from 'react';
-import { Insets, Platform } from 'react-native';
+import { Insets, Platform, StyleProp, ViewStyle } from 'react-native';
 import { Pressable } from 'react-native-gesture-handler';
 
 import { testProps } from '../../utils/CCTestingId';
@@ -11,7 +11,7 @@ export interface CCPressableOpacityProps {
   onPressWhenDisabled?: (() => void) | undefined;
   children: React.ReactNode;
   disabled?: boolean;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   hitSlop?: Insets | undefined;
   pointerEvents?: CCPointerEvents;
   id?: string;

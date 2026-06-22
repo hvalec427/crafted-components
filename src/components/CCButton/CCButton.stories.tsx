@@ -6,7 +6,8 @@ import { CCMainButton, CCButtonSizesEnum } from './CCMainButton';
 import { CCRoundButton, CCRoundButtonSizesEnum } from './CCRoundButton';
 import { CCTextButton } from './CCTextButton';
 import { CCText } from '../CCText/CCText';
-import { icons } from '../../assets/icons/index.js';
+import { icons } from '../../assets/icons';
+import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Buttons/CCButton',

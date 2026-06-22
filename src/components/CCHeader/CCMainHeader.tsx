@@ -11,7 +11,7 @@ import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { CCContainer } from '../CCLayout/CCContainer';
-import { icons } from '../../assets/icons/index.js';
+import { icons } from '../../assets/icons';
 
 interface CCHeaderAction {
   onPress: () => void;

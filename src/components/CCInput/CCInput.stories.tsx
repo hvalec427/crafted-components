@@ -40,22 +40,24 @@ export const WithPlaceholderLabel: Story = {
   render: (args) => <View style={{ width: 300 }}><CCTextInput {...args} /></View>,
 };
 
+const WithErrorStory = () => {
+  const ref = useRef<CCTextInputRef>(null);
+  useEffect(() => { ref.current?.validate(); }, []);
+  return (
+    <View style={{ width: 300 }}>
+      <CCTextInput
+        ref={ref}
+        placeholder="Required field"
+        defaultValue=""
+        onChangeText={fn()}
+        validators={{ required: { message: 'This field is required' } }}
+      />
+    </View>
+  );
+};
+
 export const WithError: StoryObj = {
-  render: () => {
-    const ref = useRef<CCTextInputRef>(null);
-    useEffect(() => { ref.current?.validate(); }, []);
-    return (
-      <View style={{ width: 300 }}>
-        <CCTextInput
-          ref={ref}
-          placeholder="Required field"
-          defaultValue=""
-          onChangeText={fn()}
-          validators={{ required: { message: 'This field is required' } }}
-        />
-      </View>
-    );
-  },
+  render: () => <WithErrorStory />,
 };
 
 export const WithWarning: Story = {

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 
-export const SafeAreaView = ({ children, style, edges, ...rest }: any) =>
+export const SafeAreaView = ({ children, style, ...rest }: { children?: React.ReactNode; style?: StyleProp<ViewStyle>; [key: string]: unknown }) =>
   React.createElement(View, { style, ...rest }, children);
 
-export const SafeAreaProvider = ({ children }: any) => children;
+export const SafeAreaProvider = ({ children }: { children?: React.ReactNode }) => children;
 
 export const useSafeAreaInsets = () => ({ top: 0, bottom: 0, left: 0, right: 0 });
 

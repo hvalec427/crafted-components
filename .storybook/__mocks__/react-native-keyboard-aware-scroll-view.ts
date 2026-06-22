@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, ScrollViewProps } from 'react-native';
 
-export const KeyboardAwareScrollView = (props: any) =>
+export const KeyboardAwareScrollView = (props: ScrollViewProps) =>
   React.createElement(ScrollView, props);

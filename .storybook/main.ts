@@ -5,7 +5,7 @@ import type { Plugin } from 'vite';
 const requireToImportPlugin: Plugin = {
   name: 'require-to-esm-assets',
   transform(code, id) {
-    if (!id.endsWith('index.js')) return;
+    if (!id.endsWith('index.js') && !id.endsWith('index.ts')) return;
     if (!id.includes('/assets/icons/') && !id.includes('/assets/images/')) return;
     let idx = 0;
     const imports: string[] = [];

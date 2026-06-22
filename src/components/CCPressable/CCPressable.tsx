@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, StyleProp, ViewStyle } from 'react-native';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 
 import colors from '../../tokens/colors.json';
@@ -9,7 +9,7 @@ export interface CCPressableProps {
   onPress: (() => void) | null;
   disabled?: boolean;
   children: React.ReactNode;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   hitSlop?: {
     top?: number;
     bottom?: number;

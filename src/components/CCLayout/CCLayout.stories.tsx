@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { CCContainer } from './CCContainer';
 import { CCRow } from './CCRow';
-import { CCSpacer } from './CCSpacer';
 import { CCText } from '../CCText/CCText';
 
 const meta = {

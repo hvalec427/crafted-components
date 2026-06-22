@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
 
 import { CCIcon } from './CCIcon';
-import { icons } from '../../assets/icons/index.js';
+import { icons } from '../../assets/icons';
 
 const meta = {
   title: 'Media/CCIcon',

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// eslint-disable-next-line no-restricted-syntax
 import { Dimensions, TextInput as Input, StyleSheet, View } from 'react-native';
 
 import colors from '../../tokens/colors.json';
