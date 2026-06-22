@@ -1,0 +1,59 @@
+{
+  "transparent": "transparent",
+
+  "primaryLightPressed": "#8DDDFF",
+  "primaryBlueBackground": "#F1FCFF",
+  "primaryBlueVeryLight": "#DAF4FF",
+  "primaryBlueLight": "#BAEBFF",
+  "primaryBlue": "#0890F1",
+  "primaryBluePressed": "#0782D9",
+  "primaryBlueDark": "#202B93",
+
+  "primaryYellowLight": "#FFE5AE",
+  "primaryYellow": "#FFD06D",
+  "primaryYellowDark": "#FFB55D",
+
+  "primaryMintGreenLight": "#93ECE5",
+  "primaryMintGreen": "#2FCCC0",
+  "primaryMintGreenDark": "#04B4A8",
+
+  "primaryPinkLight": "#FBB4C2",
+  "primaryPink": "#EF8EA2",
+  "primaryPinkDark": "#ED738C",
+
+  "blue": "#1FB6FF",
+  "blueLight": "#1FB6FF50",
+  "lightBlue": "#F8F9FA",
+
+  "successVeryLight": "#E8FFD9",
+  "successLight": "#C8FFA6",
+  "success": "#50C600",
+  "successDark": "#45AB00",
+
+  "errorLight": "#FECDCA",
+  "error": "#D92D20",
+  "errorDark": "#C92A1E",
+
+  "cautionLight": "#FEE3CA",
+  "caution": "#EC8E36",
+  "cautionDark": "#CF7D2F",
+
+  "purpleLight": "#E3D4FF",
+  "purple": "#AA81F3",
+  "purpleDark": "#9A79D6",
+
+  "white": "#ffffff",
+  "backgroundGray": "#F7FAFC",
+  "border": "#E5E5E5",
+  "lightGray": "#D8DCDF",
+  "mediumGray": "#9C9EA3",
+  "darkGray": "#585C62",
+  "black": "#1C2026",
+
+  "textColorDark": "#1C2026",
+  "textColorLight": "#ffffff",
+  "placeholder": "#9C9EA3",
+
+  "cameraOverlayDark": "#1C2026cc",
+  "cameraOverlayLight": "#ffffffcc"
+}
