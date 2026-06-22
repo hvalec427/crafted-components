@@ -9,7 +9,7 @@ storybook-static/
 yarn.lock
 
 # OS
-# .DS_Store
+.DS_Store
 
 # Editor
 .vscode/
