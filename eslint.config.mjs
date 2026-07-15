@@ -5,10 +5,10 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
 export default [
   {
-    ignores: ['node_modules/**', 'storybook-static/**'],
+    ignores: ['node_modules/**'],
   },
   {
-    files: ['src/**/*.{ts,tsx}', '.storybook/**/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
