@@ -1,4 +1,4 @@
-import type { ColorSchema, ColorSchemaName } from './colorSchema';
+import type { BaseColors, ColorSchema, ColorSchemaName } from './colorSchema';
 import defaultSchema from './schemas/default.json';
 import oceanSchema from './schemas/ocean.json';
 import sunsetSchema from './schemas/sunset.json';
@@ -56,3 +56,9 @@ export const schemaStore = {
     return () => _listeners.delete(fn);
   },
 };
+
+export function initCraftedComponents(colors: Partial<BaseColors>): void {
+  const merged = { ...defaultSchema, ...colors };
+  _current = resolveTokens(merged as Record<string, unknown>);
+  _listeners.forEach(fn => fn(_current));
+}

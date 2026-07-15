@@ -1,4 +1,4 @@
-package com.craftedcomponents
+package com.hvalec.craftedcomponents
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

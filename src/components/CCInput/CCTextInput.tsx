@@ -576,7 +576,6 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                   inputRef.current = view;
                 }}
                 allowFontScaling={false}
-                // @ts-expect-error submitBehavior is valid in RN 0.74 but missing from bundled .d.ts
                 submitBehavior={
                   multiline
                     ? 'newline'

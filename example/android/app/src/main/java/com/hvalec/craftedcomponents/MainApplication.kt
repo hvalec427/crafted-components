@@ -1,4 +1,4 @@
-package com.craftedcomponents
+package com.hvalec.craftedcomponents
 
 import android.app.Application
 import com.facebook.react.PackageList
