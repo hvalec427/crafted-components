@@ -37,6 +37,7 @@
     "@storybook/addon-ondevice-actions": "^10.5.0",
     "@storybook/addon-ondevice-controls": "^10.5.0",
     "@storybook/react-native": "^10.5.0",
+    "@storybook/test": "^8.6.15",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.2.0",
     "@types/react-test-renderer": "^19.1.0",
