@@ -36,6 +36,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5"
   },
   "devDependencies": {
+    "@storybook/test": "^8.6.15",
     "@types/react": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
