@@ -26,6 +26,11 @@ const preview: Preview = {
     ),
   ],
   parameters: {
+    options: {
+      storySort: {
+        order: ['Global', '*'],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

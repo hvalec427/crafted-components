@@ -8,11 +8,12 @@ import { schemaStore } from '../../tokens/schemaStore';
 import defaultBase from '../../tokens/schemas/default.json';
 import oceanBase from '../../tokens/schemas/ocean.json';
 import sunsetBase from '../../tokens/schemas/sunset.json';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const SCHEMAS: { name: ColorSchemaName; primary: string }[] = [
   { name: 'default', primary: defaultBase.primary },
-  { name: 'ocean',   primary: oceanBase.primary },
-  { name: 'sunset',  primary: sunsetBase.primary },
+  { name: 'ocean', primary: oceanBase.primary },
+  { name: 'sunset', primary: sunsetBase.primary },
 ];
 
 const GlobalControlsComponent = () => {
@@ -69,20 +70,22 @@ const GlobalControlsComponent = () => {
         <Text style={{ fontSize: 11, fontWeight: '600', color: '#9C9EA3', textTransform: 'uppercase', letterSpacing: 0.8 }}>
           Preview
         </Text>
-        <View style={{ flexDirection: 'row', gap: 8 }}>
-          {SCHEMAS.find(s => s.name === active) && (
-            Object.entries(
-              active === 'default' ? defaultBase :
-              active === 'ocean'   ? oceanBase   :
-              sunsetBase
-            ).map(([key, value]) => (
-              <View key={key} style={{ alignItems: 'center', gap: 4 }}>
-                <View style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: value }} />
-                <Text style={{ fontSize: 9, color: '#9C9EA3', textTransform: 'capitalize' }}>{key}</Text>
-              </View>
-            ))
-          )}
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View style={{ flexDirection: 'row', gap: 8 }}>
+            {SCHEMAS.find(s => s.name === active) && (
+              Object.entries(
+                active === 'default' ? defaultBase :
+                  active === 'ocean' ? oceanBase :
+                    sunsetBase
+              ).map(([key, value]) => (
+                <View key={key} style={{ alignItems: 'center', gap: 4 }}>
+                  <View style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: value }} />
+                  <Text style={{ fontSize: 9, color: '#9C9EA3', textTransform: 'capitalize' }}>{key}</Text>
+                </View>
+              ))
+            )}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
