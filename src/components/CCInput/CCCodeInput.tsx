@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, TextInput as Input, StyleSheet, View } from 'react-native';
 
 import colors from '../../tokens/colors.json';
@@ -24,7 +24,7 @@ const style = StyleSheet.create({
     zIndex: 100,
   },
   codeInput: {
-    width: 37,
+    width: 44,
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
@@ -32,7 +32,6 @@ const style = StyleSheet.create({
     borderColor: colors.border,
     borderRadius: 8,
     backgroundColor: colors.white,
-    flex: 1,
   },
   codeInputFocused: {
     borderColor: colors.blue,
@@ -91,6 +90,10 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
 
   const [currentValue, setCurrentValue] = useState(value);
 
+  useEffect(() => {
+    setCurrentValue(value);
+  }, [value]);
+
   const currentIndex =
     currentValue.length < numberOfChar ? currentValue.length : numberOfChar - 1;
 
@@ -139,7 +142,7 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
                 status === 'error' && style.codeInputError,
                 status === 'loading' && style.codeInputLoading,
               ]}>
-              <CCText type="h3Bold">{value[index]}</CCText>
+              <CCText type="h3Bold">{currentValue[index]}</CCText>
             </View>
           ))}
         </CCRow>
