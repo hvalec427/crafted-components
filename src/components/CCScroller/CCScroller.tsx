@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import colors from '../../tokens/colors.json';
-
 const style = StyleSheet.create({
   scroller: {
     flexGrow: 1,
@@ -21,7 +19,8 @@ interface CCScrollerProps {
   avoidKeyboard?: boolean;
   paddingTop?: number;
   paddingBottom?: number;
-  bgColor?: keyof typeof colors;
+  /** Background color — accepts a hex string */
+  bgColor?: string;
   refetch?: Function;
   fetchMore?: Function;
   scrollViewRef?: RefObject<ScrollView>;
@@ -93,7 +92,6 @@ export const CCScroller = (props: CCScrollerProps) => {
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         extraHeight={extraHeight}
-        // enableOnAndroid={true}
         ref={ref => {
           if (scrollViewRef) {
             // @ts-ignore
@@ -103,7 +101,7 @@ export const CCScroller = (props: CCScrollerProps) => {
         {...commonProps}
         contentContainerStyle={[style.scroller]}
         style={[
-          bgColor && { backgroundColor: colors[bgColor] },
+          bgColor ? { backgroundColor: bgColor } : undefined,
           { paddingTop },
           { paddingBottom },
         ]}>
@@ -124,7 +122,7 @@ export const CCScroller = (props: CCScrollerProps) => {
       {...commonProps}
       contentContainerStyle={[
         style.scroller,
-        bgColor && { backgroundColor: colors[bgColor] },
+        bgColor ? { backgroundColor: bgColor } : undefined,
         { paddingTop },
         { paddingBottom },
       ]}>

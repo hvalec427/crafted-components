@@ -2,12 +2,12 @@ export { CCMainButton } from './CCMainButton';
 export type { CCMainButtonProps } from './CCMainButton';
 export { CCMainButtonTypes, CCButtonSizesEnum } from './CCMainButton';
 
-export { CCMainButtonStyle, CCMainButtonConstants, CCMainButtonColorsConstants } from './CCMainButtonStyle';
+export { makeMainButtonStyle, makeMainButtonColors, CCMainButtonConstants } from './CCMainButtonStyle';
 
 export { CCRoundButton } from './CCRoundButton';
 export { CCRoundButtonTypes, CCRoundButtonSizesEnum } from './CCRoundButton';
 
-export { RoundButtonStyle, RoundButtonSizes } from './CCRoundButtonStyle';
+export { makeRoundButtonStyle, RoundButtonSizes } from './CCRoundButtonStyle';
 
 export { CCTextButton } from './CCTextButton';
 export { CCTextButtonSizesEnum } from './CCTextButton';

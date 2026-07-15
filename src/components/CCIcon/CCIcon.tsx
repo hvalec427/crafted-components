@@ -8,14 +8,13 @@ import {
   StyleProp,
 } from 'react-native';
 
-import colors from '../../tokens/colors.json';
-
 export interface CCIconProps {
   source: ImageSourcePropType;
   width?: DimensionValue;
   height?: DimensionValue;
   resizeMode?: ImageResizeMode;
-  tintColor?: keyof typeof colors;
+  /** Hex color string for the icon tint */
+  tintColor?: string;
   style?: StyleProp<ImageStyle>;
 }
 
@@ -31,7 +30,7 @@ export const CCIcon = ({
     resizeMode={resizeMode}
     source={source}
     style={[
-      tintColor && { tintColor: colors[tintColor] },
+      tintColor ? { tintColor } : {},
       width ? { width } : {},
       height ? { height } : {},
       style,

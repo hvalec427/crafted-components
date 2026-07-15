@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleProp, Text, TextStyle } from 'react-native';
 
-import colors from '../../tokens/colors.json';
 import { typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 export type TextAlign =
   | 'auto'
@@ -17,7 +17,8 @@ export interface CCTextProps {
   children?: string | React.ReactNode | undefined;
   type?: keyof typeof typography;
   style?: StyleProp<TextStyle>;
-  color?: keyof typeof colors;
+  /** Hex color string — overrides the schema text color */
+  color?: string;
   flex?: number;
   flexGrow?: number;
   flexShrink?: number;
@@ -45,6 +46,8 @@ export const CCText = (props: CCTextProps) => {
     id,
   } = props;
 
+  const schema = useColorSchema();
+
   return (
     <Text
       {...testProps(id)}
@@ -52,8 +55,9 @@ export const CCText = (props: CCTextProps) => {
       onPress={onPress ? onPress : undefined}
       {...(numberOfLines && { numberOfLines })}
       style={[
+        { color: schema.components.text.primary },
         type && { ...typography[type] },
-        color && { color: colors[color] },
+        color && { color },
         textAlign && { textAlign },
         ...(flex ? [{ flex }] : []),
         ...(flexGrow ? [{ flexGrow }] : []),

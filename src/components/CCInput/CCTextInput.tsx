@@ -16,10 +16,10 @@ import {
   View,
 } from 'react-native';
 
-import colors from '../../tokens/colors.json';
 import { CCFontFamilies, typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 import {
   CCTextInputController,
   CCTextInputFormState,
@@ -168,31 +168,17 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderColor: colors.border,
     gap: 8,
     borderWidth: 1,
     borderRadius: 8,
     height: 56,
     paddingHorizontal: 16,
-    backgroundColor: colors.white,
   },
   inputWrapperTextArea: {
     height: undefined,
     minHeight: 80,
     alignItems: 'flex-start',
     paddingVertical: 12,
-  },
-  inputWrapperFocused: {
-    borderColor: colors.primaryBlue,
-    borderWidth: 2,
-  },
-  inputWrapperError: {
-    borderColor: colors.error,
-    borderWidth: 2,
-  },
-  inputWrapperWarning: {
-    borderColor: colors.caution,
-    borderWidth: 2,
   },
   inputAndPlaceholderWrapper: {
     height: '100%',
@@ -264,16 +250,13 @@ const style = StyleSheet.create({
   },
   instructions: {
     ...typography.caption,
-    color: colors.darkGray,
   },
   error: {
     ...typography.caption,
-    color: colors.error,
     fontFamily: CCFontFamilies.SemiBold,
   },
   warning: {
     ...typography.caption,
-    color: colors.darkGray,
     fontFamily: CCFontFamilies.SemiBold,
   },
   placeholderLabelWrapper: {
@@ -284,7 +267,6 @@ const style = StyleSheet.create({
   },
   placeholderLabel: {
     ...typography.caption,
-    color: colors.darkGray,
   },
   spacer: {
     height: 16,
@@ -293,6 +275,10 @@ const style = StyleSheet.create({
 
 export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
   (props, ref) => {
+    const schema = useColorSchema();
+    const ic = schema.components.input;
+    const neutral = schema.components.neutral;
+
     const {
       controller,
       label,
@@ -526,7 +512,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           </Text>
         ) : null}
         {instructions && instructionsPosition === 'top' ? (
-          <Text style={style.instructions}>{instructions}</Text>
+          <Text style={[style.instructions, { color: neutral.darkGray }]}>{instructions}</Text>
         ) : null}
 
         <CCPressableOpacity
@@ -536,10 +522,11 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           disabled={!editable}
           style={[
             style.inputWrapper,
+            { borderColor: ic.border, backgroundColor: ic.background },
             multiline ? style.inputWrapperTextArea : {},
-            error ? style.inputWrapperError : {},
-            warning ? style.inputWrapperWarning : {},
-            isFocused ? style.inputWrapperFocused : {},
+            error    ? { borderColor: ic.borderError,   borderWidth: 2 } : {},
+            warning  ? { borderColor: ic.borderWarning, borderWidth: 2 } : {},
+            isFocused ? { borderColor: ic.borderFocused, borderWidth: 2 } : {},
           ]}>
           {leading && <View>{leading}</View>}
           <View
@@ -558,7 +545,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                   multiline && !isAndroid && style.placeholderMultilineIos,
                   { transform: [{ translateY: placeholderY }] },
                 ]}>
-                <Text numberOfLines={1} style={style.placeholderLabel}>
+                <Text numberOfLines={1} style={[style.placeholderLabel, { color: neutral.darkGray }]}>
                   {placeholderLabel}
                 </Text>
               </Animated.View>
@@ -627,8 +614,8 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                 placeholder={placeholder}
                 placeholderTextColor={
                   (!isFocused && !placeholderLabel) || isFocused
-                    ? colors.placeholder
-                    : colors.transparent
+                    ? ic.placeholder
+                    : 'transparent'
                 }
                 defaultValue={defaultValue}
                 onChangeText={newValue => {
@@ -682,8 +669,8 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           {trailing && <View>{trailing}</View>}
         </CCPressableOpacity>
 
-        {error ? <Text style={style.error}>{error}</Text> : null}
-        {warning ? <Text style={style.warning}>{warning}</Text> : null}
+        {error ? <Text style={[style.error, { color: ic.errorText }]}>{error}</Text> : null}
+        {warning ? <Text style={[style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
 
         {weirdExtraSpaceBellowInputIfInstructionsAreShownAndErrorCanBeShown &&
         !error &&
@@ -692,7 +679,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
         ) : null}
 
         {instructions && instructionsPosition === 'bottom' ? (
-          <Text style={style.instructions}>{instructions}</Text>
+          <Text style={[style.instructions, { color: neutral.darkGray }]}>{instructions}</Text>
         ) : null}
       </View>
     );

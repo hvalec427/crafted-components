@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ImageSourcePropType, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { CCIcon } from '../CCIcon/CCIcon';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { testProps } from '../../utils/CCTestingId';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
-import { RoundButtonSizes, RoundButtonStyle } from './CCRoundButtonStyle';
+import { RoundButtonSizes, makeRoundButtonStyle } from './CCRoundButtonStyle';
 
 const buttonStyle = StyleSheet.create({
   wrapper: {
@@ -55,18 +56,19 @@ export const CCRoundButton = (props: CCRoundButtonProps) => {
     id,
   } = props;
 
+  const schema = useColorSchema();
+  const RoundButtonStyle = useMemo(() => makeRoundButtonStyle(schema), [schema]);
+
   return (
     <View {...testProps(id)} pointerEvents="box-none">
       <CCPressableOpacity
         disabled={disabled}
         onPress={onPress}
         style={[
-          RoundButtonStyle[`${type}Wrapper` as keyof typeof RoundButtonStyle] as ViewStyle,
+          RoundButtonStyle[`${type}Wrapper`] as ViewStyle,
           RoundButtonSizes[`${size}` as keyof typeof RoundButtonSizes],
           disabled &&
-            (RoundButtonStyle[
-              `${type}WrapperDisabled` as keyof typeof RoundButtonStyle
-            ] as ViewStyle),
+            (RoundButtonStyle[`${type}WrapperDisabled`] as ViewStyle),
           buttonStyle.wrapper,
           style,
         ]}>
@@ -75,7 +77,7 @@ export const CCRoundButton = (props: CCRoundButtonProps) => {
             source={icon}
             style={[
               buttonStyle.icon,
-              RoundButtonStyle[`${type}Tint` as keyof typeof RoundButtonStyle],
+              RoundButtonStyle[`${type}Tint`],
             ]}
           />
         )}

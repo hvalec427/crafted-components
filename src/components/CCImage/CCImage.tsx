@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { DimensionValue, Image, ImageResizeMode } from 'react-native';
 
-import colors from '../../tokens/colors.json';
-
 export interface CCImageProps {
   url: string;
   width?: DimensionValue;
   height?: DimensionValue;
   aspectRatio?: number;
   resizeMode?: ImageResizeMode;
-  tintColor?: keyof typeof colors;
+  /** Hex color string for the image tint */
+  tintColor?: string;
   opacity?: number;
 }
 
@@ -30,7 +29,7 @@ export const CCImage = ({
       aspectRatio ? { aspectRatio } : {},
       height ? { height } : {},
       opacity !== 1 ? { opacity } : {},
-      tintColor ? { tintColor: colors[tintColor] } : {},
+      tintColor ? { tintColor } : {},
     ]}
   />
 );

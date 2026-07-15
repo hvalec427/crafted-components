@@ -1,18 +1,16 @@
 import React from 'react';
 import { TextInput as Input, Platform, StyleSheet, View } from 'react-native';
 
-import colors from '../../tokens/colors.json';
 import { testProps } from '../../utils/CCTestingId';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const style = StyleSheet.create({
   wrapper: {
     borderWidth: 1,
-    borderColor: colors.border,
     borderRadius: 12,
     minHeight: 55,
     justifyContent: 'center',
     paddingLeft: 16,
-    backgroundColor: colors.white,
   },
   iosWrapperPaddingTop: {
     paddingTop: 10,
@@ -43,6 +41,9 @@ export const CCTextArea = (props: CCTextAreaProps) => {
     id,
   } = props;
 
+  const schema = useColorSchema();
+  const ic = schema.components.input;
+
   const initialWrapperHeight = 21;
 
   let inputHeight;
@@ -55,6 +56,7 @@ export const CCTextArea = (props: CCTextAreaProps) => {
     <View
       style={[
         style.wrapper,
+        { borderColor: ic.border, backgroundColor: ic.background },
         Platform.OS === 'ios' && inputInOneLine && style.iosWrapperPaddingTop,
       ]}>
       <Input

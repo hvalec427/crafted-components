@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, TextInput as Input, StyleSheet, View } from 'react-native';
 
-import colors from '../../tokens/colors.json';
 import { CCText } from '../CCText/CCText';
 import { CCColumn } from '../CCLayout/CCColumn';
 import { CCRow } from '../CCLayout/CCRow';
 import { testProps } from '../../utils/CCTestingId';
 import CustomPressable from '../CCPressable/CCPressable';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const width = Dimensions.get('window').width;
 
@@ -29,33 +29,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: colors.border,
     borderRadius: 8,
-    backgroundColor: colors.white,
-  },
-  codeInputFocused: {
-    borderColor: colors.blue,
-  },
-  codeInputSuccess: {
-    borderColor: colors.success,
-  },
-  codeInputError: {
-    borderColor: colors.error,
-  },
-  codeInputLoading: {
-    borderColor: colors.border,
-  },
-  messageSuccess: {
-    color: colors.success,
-  },
-  messageError: {
-    color: colors.error,
-  },
-  messageLoading: {
-    color: colors.mediumGray,
-  },
-  hideMessage: {
-    opacity: 0,
   },
 });
 
@@ -86,6 +60,9 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
     id,
   } = props;
 
+  const schema = useColorSchema();
+  const ci = schema.components.codeInput;
+
   const inputRef = React.useRef<Input>(null);
 
   const [currentValue, setCurrentValue] = useState(value);
@@ -111,6 +88,12 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
     inputRef.current?.focus?.();
   };
 
+  const messageColor =
+    status === 'success' ? ci.successText :
+    status === 'error'   ? ci.errorText   :
+    status === 'loading' ? ci.loadingText :
+    'transparent';
+
   return (
     <CustomPressable onPress={onPressInput}>
       <CCColumn>
@@ -130,30 +113,26 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
           autoFocus={autoFocus}
         />
         <CCRow gap={8}>
-          {[...Array(numberOfChar)].map((_, index) => (
-            <View
-              key={index}
-              style={[
-                style.codeInput,
-                currentIndex === index &&
-                  status === 'other' &&
-                  style.codeInputFocused,
-                status === 'success' && style.codeInputSuccess,
-                status === 'error' && style.codeInputError,
-                status === 'loading' && style.codeInputLoading,
-              ]}>
-              <CCText type="h3Bold">{currentValue[index]}</CCText>
-            </View>
-          ))}
+          {[...Array(numberOfChar)].map((_, index) => {
+            const borderColor =
+              status === 'success' ? ci.borderSuccess :
+              status === 'error'   ? ci.borderError   :
+              status === 'loading' ? ci.border         :
+              currentIndex === index ? ci.borderFocused : ci.border;
+
+            return (
+              <View
+                key={index}
+                style={[
+                  style.codeInput,
+                  { borderColor, backgroundColor: ci.background },
+                ]}>
+                <CCText type="h3Bold">{currentValue[index]}</CCText>
+              </View>
+            );
+          })}
         </CCRow>
-        <CCText
-          type="bodyReg"
-          style={[
-            status === 'other' && style.hideMessage,
-            status === 'success' && style.messageSuccess,
-            status === 'error' && style.messageError,
-            status === 'loading' && style.messageLoading,
-          ]}>
+        <CCText type="bodyReg" style={[{ color: messageColor }]}>
           {message}
         </CCText>
       </CCColumn>

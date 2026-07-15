@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import colors from '../../tokens/colors.json';
 import { CCContainer } from '../CCLayout/CCContainer';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const style = StyleSheet.create({
   outerWrapper: {
@@ -27,23 +27,26 @@ interface CCButtonGroupProps {
   children: React.ReactNode;
   extraComponent?: React.ReactNode;
   vertical?: boolean;
-  backgroundColor?: keyof typeof colors;
+  /** Background color — accepts a hex string or omit to use the schema surface color */
+  bgColor?: string;
   customStyle?: StyleProp<ViewStyle>;
-  bgColor?: keyof typeof colors;
   noBottomPadding?: boolean;
   paddingTop?: number;
 }
 
 export const CCButtonGroup = (props: CCButtonGroupProps) => {
+  const schema = useColorSchema();
+
   const {
     paddingTop = 10,
     children,
     extraComponent,
     vertical = false,
     customStyle,
-    bgColor = 'white',
     noBottomPadding = false,
   } = props;
+
+  const bgColor = props.bgColor ?? schema.components.buttonGroup.background;
 
   const safeAreaDimensions = useSafeAreaInsets();
 
@@ -57,12 +60,7 @@ export const CCButtonGroup = (props: CCButtonGroupProps) => {
       paddingBottom={bottompadding}
       marginTop={10}
       paddingTop={paddingTop}
-      style={[
-        style.outerWrapper,
-        {
-          backgroundColor: colors[bgColor],
-        },
-      ]}>
+      style={[style.outerWrapper, { backgroundColor: bgColor }]}>
       {extraComponent}
       <CCContainer
         gap={15}

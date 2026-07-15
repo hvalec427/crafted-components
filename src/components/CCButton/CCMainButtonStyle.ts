@@ -1,289 +1,124 @@
-import { StyleSheet } from 'react-native';
-
-import colors from '../../tokens/colors.json';
+import type { ColorSchema } from '../../tokens/colorSchema';
 
 export const CCMainButtonConstants: {
-  [key in string]: {
-    height: number;
-    paddingHorizontal: number;
-  };
+  [key in string]: { height: number; paddingHorizontal: number };
 } = {
-  small: {
-    height: 30,
-    paddingHorizontal: 12,
-  },
-  medium: {
-    height: 48,
-    paddingHorizontal: 12,
-  },
-  large: {
-    height: 54,
-    paddingHorizontal: 16,
-  },
+  small:  { height: 30, paddingHorizontal: 12 },
+  medium: { height: 48, paddingHorizontal: 12 },
+  large:  { height: 54, paddingHorizontal: 16 },
 };
 
-export const CCMainButtonColorsConstants: {
-  [key in string]: {
-    mainTextColor: keyof typeof colors;
-    pressedTextColor: keyof typeof colors;
-    disabledTextColor: keyof typeof colors;
+export const makeMainButtonColors = (schema: ColorSchema) => {
+  const b = schema.components.button;
+  return {
+    primary: {
+      mainTextColor:     b.primaryText,
+      pressedTextColor:  b.primaryText,
+      disabledTextColor: b.primaryTextDisabled,
+    },
+    primaryLight: {
+      mainTextColor:     b.primaryLightText,
+      pressedTextColor:  b.primaryLightText,
+      disabledTextColor: b.primaryLightTextDisabled,
+    },
+    fail: {
+      mainTextColor:     b.failText,
+      pressedTextColor:  b.failText,
+      disabledTextColor: b.failText,
+    },
+    success: {
+      mainTextColor:     b.successText,
+      pressedTextColor:  b.successText,
+      disabledTextColor: b.successTextDisabled,
+    },
+    outline: {
+      mainTextColor:     b.outlineText,
+      pressedTextColor:  b.outlinePressedText,
+      disabledTextColor: b.outlineTextDisabled,
+    },
+    outlineDark: {
+      mainTextColor:     b.outlineDarkText,
+      pressedTextColor:  b.outlineDarkPressedText,
+      disabledTextColor: b.outlineDarkTextDisabled,
+    },
+    outlineError: {
+      mainTextColor:     b.outlineErrorText,
+      pressedTextColor:  b.outlineErrorPressedText,
+      disabledTextColor: b.outlineErrorTextDisabled,
+    },
+    white: {
+      mainTextColor:     b.whiteText,
+      pressedTextColor:  b.whiteText,
+      disabledTextColor: b.whiteText,
+    },
   };
-} = {
-  primary: {
-    mainTextColor: 'textColorLight',
-    pressedTextColor: 'textColorLight',
-    disabledTextColor: 'textColorLight',
-  },
-
-  primaryLight: {
-    mainTextColor: 'primaryBluePressed',
-    pressedTextColor: 'primaryBluePressed',
-    disabledTextColor: 'textColorLight',
-  },
-
-  fail: {
-    mainTextColor: 'textColorLight',
-    pressedTextColor: 'textColorLight',
-    disabledTextColor: 'textColorLight',
-  },
-
-  success: {
-    mainTextColor: 'textColorLight',
-    pressedTextColor: 'textColorLight',
-    disabledTextColor: 'mediumGray',
-  },
-
-  outline: {
-    mainTextColor: 'primaryBlue',
-    pressedTextColor: 'primaryBluePressed',
-    disabledTextColor: 'lightGray',
-  },
-
-  outlineDark: {
-    mainTextColor: 'darkGray',
-    pressedTextColor: 'black',
-    disabledTextColor: 'lightGray',
-  },
-
-  outlineError: {
-    mainTextColor: 'error',
-    pressedTextColor: 'errorDark',
-    disabledTextColor: 'primaryPinkLight',
-  },
-
-  white: {
-    mainTextColor: 'textColorDark',
-    pressedTextColor: 'textColorDark',
-    disabledTextColor: 'textColorDark',
-  },
 };
 
-export const CCMainButtonStyle = StyleSheet.create({
-  primaryWrapper: {
-    backgroundColor: colors.primaryBlue,
-    borderColor: colors.primaryBlue,
-    borderWidth: 1,
-  },
-  primaryPressedWrapper: {
-    backgroundColor: colors.primaryBluePressed,
-    borderColor: colors.primaryBluePressed,
-  },
-  primaryDisabledWrapper: {
-    backgroundColor: colors.primaryBlueLight,
-    borderColor: colors.primaryBlueLight,
-  },
-  primaryWrapperProgress: {
-    backgroundColor: colors.primaryBluePressed,
-  },
-  primaryText: {
-    color: colors[CCMainButtonColorsConstants.primary.mainTextColor],
-  },
-  primaryPressedText: {
-    color: colors[CCMainButtonColorsConstants.primary.pressedTextColor],
-  },
-  primaryDisabledText: {
-    color: colors[CCMainButtonColorsConstants.primary.disabledTextColor],
-  },
+export const makeMainButtonStyle = (schema: ColorSchema): Record<string, object> => {
+  const b = schema.components.button;
+  return {
+    primaryWrapper:         { backgroundColor: b.primaryBg,             borderColor: b.primaryBorder,             borderWidth: 1 },
+    primaryPressedWrapper:  { backgroundColor: b.primaryPressedBg,      borderColor: b.primaryPressedBg },
+    primaryDisabledWrapper: { backgroundColor: b.primaryDisabledBg,     borderColor: b.primaryDisabledBg },
+    primaryWrapperProgress: { backgroundColor: b.primaryPressedBg },
+    primaryText:            { color: b.primaryText },
+    primaryPressedText:     { color: b.primaryText },
+    primaryDisabledText:    { color: b.primaryTextDisabled },
 
-  primaryLightWrapper: {
-    backgroundColor: colors.primaryBlueVeryLight,
-    borderColor: colors.primaryBlueVeryLight,
-    borderWidth: 1,
-  },
-  primaryLightPressedWrapper: {
-    backgroundColor: colors.primaryLightPressed,
-    borderColor: colors.primaryLightPressed,
-  },
-  primaryLightDisabledWrapper: {
-    backgroundColor: colors.lightGray,
-    borderColor: colors.lightGray,
-  },
-  primaryLightWrapperProgress: {
-    backgroundColor: colors.primaryLightPressed,
-  },
-  primaryLightText: {
-    color: colors[CCMainButtonColorsConstants.primaryLight.mainTextColor],
-  },
-  primaryLightPressedText: {
-    color: colors[CCMainButtonColorsConstants.primaryLight.pressedTextColor],
-  },
-  primaryLightDisabledText: {
-    color: colors[CCMainButtonColorsConstants.primaryLight.disabledTextColor],
-  },
+    primaryLightWrapper:         { backgroundColor: b.primaryLightBg,            borderColor: b.primaryLightBorder,            borderWidth: 1 },
+    primaryLightPressedWrapper:  { backgroundColor: b.primaryLightPressedBg,     borderColor: b.primaryLightPressedBorder },
+    primaryLightDisabledWrapper: { backgroundColor: b.primaryLightDisabledBg,    borderColor: b.primaryLightDisabledBg },
+    primaryLightWrapperProgress: { backgroundColor: b.primaryLightPressedBg },
+    primaryLightText:            { color: b.primaryLightText },
+    primaryLightPressedText:     { color: b.primaryLightText },
+    primaryLightDisabledText:    { color: b.primaryLightTextDisabled },
 
-  failWrapper: {
-    backgroundColor: colors.error,
-    borderColor: colors.error,
-    borderWidth: 1,
-  },
-  failPressedWrapper: {
-    backgroundColor: colors.errorDark,
-    borderColor: colors.errorDark,
-  },
-  failDisabledWrapper: {
-    backgroundColor: colors.primaryPinkLight,
-    borderColor: colors.primaryPinkLight,
-  },
-  failWrapperProgress: {
-    backgroundColor: colors.errorDark,
-  },
-  failText: {
-    color: colors[CCMainButtonColorsConstants.fail.mainTextColor],
-  },
-  failPressedText: {
-    color: colors[CCMainButtonColorsConstants.fail.pressedTextColor],
-  },
-  failDisabledText: {
-    color: colors[CCMainButtonColorsConstants.fail.disabledTextColor],
-  },
+    failWrapper:         { backgroundColor: b.failBg,          borderColor: b.failBorder,        borderWidth: 1 },
+    failPressedWrapper:  { backgroundColor: b.failPressedBg,   borderColor: b.failPressedBg },
+    failDisabledWrapper: { backgroundColor: b.failDisabledBg,  borderColor: b.failDisabledBg },
+    failWrapperProgress: { backgroundColor: b.failPressedBg },
+    failText:            { color: b.failText },
+    failPressedText:     { color: b.failText },
+    failDisabledText:    { color: b.failText },
 
-  successWrapper: {
-    backgroundColor: colors.success,
-    borderColor: colors.success,
-    borderWidth: 1,
-  },
-  successPressedWrapper: {
-    backgroundColor: colors.successDark,
-    borderColor: colors.successDark,
-  },
-  successDisabledWrapper: {
-    backgroundColor: colors.successVeryLight,
-    borderColor: colors.successVeryLight,
-  },
-  successWrapperProgress: {
-    backgroundColor: colors.successDark,
-  },
-  successText: {
-    color: colors[CCMainButtonColorsConstants.success.mainTextColor],
-  },
-  successPressedText: {
-    color: colors[CCMainButtonColorsConstants.success.pressedTextColor],
-  },
-  successDisabledText: {
-    color: colors[CCMainButtonColorsConstants.success.disabledTextColor],
-  },
+    successWrapper:         { backgroundColor: b.successBg,          borderColor: b.successBorder,       borderWidth: 1 },
+    successPressedWrapper:  { backgroundColor: b.successPressedBg,   borderColor: b.successPressedBg },
+    successDisabledWrapper: { backgroundColor: b.successDisabledBg,  borderColor: b.successDisabledBg },
+    successWrapperProgress: { backgroundColor: b.successPressedBg },
+    successText:            { color: b.successText },
+    successPressedText:     { color: b.successText },
+    successDisabledText:    { color: b.successTextDisabled },
 
-  outlineWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.primaryBlue,
-    borderWidth: 1,
-  },
-  outlinePressedWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.primaryBluePressed,
-  },
-  outlineDisabledWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.lightGray,
-  },
-  outlineWrapperProgress: {
-    backgroundColor: colors.lightBlue,
-  },
-  outlineText: {
-    color: colors[CCMainButtonColorsConstants.outline.mainTextColor],
-  },
-  outlinePressedText: {
-    color: colors[CCMainButtonColorsConstants.outline.pressedTextColor],
-  },
-  outlineDisabledText: {
-    color: colors[CCMainButtonColorsConstants.outline.disabledTextColor],
-  },
+    outlineWrapper:         { backgroundColor: b.outlineBg,        borderColor: b.outlineBorder,           borderWidth: 1 },
+    outlinePressedWrapper:  { backgroundColor: b.outlinePressedBg, borderColor: b.outlinePressedBorder },
+    outlineDisabledWrapper: { backgroundColor: b.outlineBg,        borderColor: b.outlineDisabledBorder },
+    outlineWrapperProgress: { backgroundColor: b.outlineProgressBg },
+    outlineText:            { color: b.outlineText },
+    outlinePressedText:     { color: b.outlinePressedText },
+    outlineDisabledText:    { color: b.outlineTextDisabled },
 
-  outlineDarkWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.darkGray,
-    borderWidth: 1,
-  },
-  outlineDarkPressedWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.black,
-  },
-  outlineDarkDisabledWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.lightGray,
-  },
-  outlineDarkWrapperProgress: {
-    backgroundColor: colors.backgroundGray,
-  },
-  outlineDarkText: {
-    color: colors[CCMainButtonColorsConstants.outlineDark.mainTextColor],
-  },
-  outlineDarkPressedText: {
-    color: colors[CCMainButtonColorsConstants.outlineDark.pressedTextColor],
-  },
-  outlineDarkDisabledText: {
-    color: colors[CCMainButtonColorsConstants.outlineDark.disabledTextColor],
-  },
+    outlineDarkWrapper:         { backgroundColor: b.outlineDarkBg, borderColor: b.outlineDarkBorder,          borderWidth: 1 },
+    outlineDarkPressedWrapper:  { backgroundColor: b.outlineDarkBg, borderColor: b.outlineDarkPressedBorder },
+    outlineDarkDisabledWrapper: { backgroundColor: b.outlineDarkBg, borderColor: b.outlineDarkDisabledBorder },
+    outlineDarkWrapperProgress: { backgroundColor: b.outlineDarkProgressBg },
+    outlineDarkText:            { color: b.outlineDarkText },
+    outlineDarkPressedText:     { color: b.outlineDarkPressedText },
+    outlineDarkDisabledText:    { color: b.outlineDarkTextDisabled },
 
-  outlineErrorWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.error,
-    borderWidth: 1,
-  },
-  outlineErrorPressedWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.errorDark,
-  },
-  outlineErrorDisabledWrapper: {
-    backgroundColor: colors.transparent,
-    borderColor: colors.primaryPinkLight,
-  },
-  outlineErrorWrapperProgress: {
-    backgroundColor: colors.primaryPinkLight,
-  },
-  outlineErrorText: {
-    color: colors[CCMainButtonColorsConstants.outlineError.mainTextColor],
-  },
-  outlineErrorPressedText: {
-    color: colors[CCMainButtonColorsConstants.outlineError.pressedTextColor],
-  },
-  outlineErrorDisabledText: {
-    color: colors[CCMainButtonColorsConstants.outlineError.disabledTextColor],
-  },
+    outlineErrorWrapper:         { backgroundColor: b.outlineErrorBg, borderColor: b.outlineErrorBorder,          borderWidth: 1 },
+    outlineErrorPressedWrapper:  { backgroundColor: b.outlineErrorBg, borderColor: b.outlineErrorPressedBorder },
+    outlineErrorDisabledWrapper: { backgroundColor: b.outlineErrorBg, borderColor: b.outlineErrorDisabledBorder },
+    outlineErrorWrapperProgress: { backgroundColor: b.outlineErrorProgressBg },
+    outlineErrorText:            { color: b.outlineErrorText },
+    outlineErrorPressedText:     { color: b.outlineErrorPressedText },
+    outlineErrorDisabledText:    { color: b.outlineErrorTextDisabled },
 
-  whiteWrapper: {
-    backgroundColor: colors.white,
-    borderColor: colors.white,
-    borderWidth: 1,
-  },
-  whitePressedWrapper: {
-    backgroundColor: colors.border,
-    borderColor: colors.border,
-  },
-  whiteDisabledWrapper: {
-    backgroundColor: colors.border,
-    borderColor: colors.border,
-  },
-  whiteWrapperProgress: {
-    backgroundColor: colors.border,
-  },
-  whiteText: {
-    color: colors[CCMainButtonColorsConstants.white.mainTextColor],
-  },
-  whitePressedText: {
-    color: colors[CCMainButtonColorsConstants.white.pressedTextColor],
-  },
-  whiteDisabledText: {
-    color: colors[CCMainButtonColorsConstants.white.disabledTextColor],
-  },
-});
+    whiteWrapper:         { backgroundColor: b.whiteBg,         borderColor: b.whiteBorder,        borderWidth: 1 },
+    whitePressedWrapper:  { backgroundColor: b.whitePressedBg,  borderColor: b.whitePressedBorder },
+    whiteDisabledWrapper: { backgroundColor: b.whiteDisabledBg, borderColor: b.whiteDisabledBg },
+    whiteWrapperProgress: { backgroundColor: b.whitePressedBg },
+    whiteText:            { color: b.whiteText },
+    whitePressedText:     { color: b.whiteText },
+    whiteDisabledText:    { color: b.whiteText },
+  };
+};

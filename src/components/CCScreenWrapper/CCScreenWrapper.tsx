@@ -2,8 +2,8 @@ import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
-import colors from '../../tokens/colors.json';
 import { CCContainer } from '../CCLayout/CCContainer';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const style = StyleSheet.create({
   safeArea: {
@@ -18,8 +18,10 @@ const style = StyleSheet.create({
 interface CCScreenWrapperProps {
   children: React.ReactNode;
   header?: React.ReactNode;
-  bgColor?: keyof typeof colors;
-  bgColorBottomSafeArea?: keyof typeof colors;
+  /** Background color — accepts a hex string or omit to use the schema background color */
+  bgColor?: string;
+  /** Bottom safe area color — defaults to bgColor */
+  bgColorBottomSafeArea?: string;
   disableTouch?: boolean;
   noTopSafeArea?: boolean;
   noBottomSafeArea?: boolean;
@@ -28,17 +30,20 @@ interface CCScreenWrapperProps {
 }
 
 export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
+  const schema = useColorSchema();
+
   const {
     children,
     header,
     theme = 'light',
-    bgColor = 'white',
-    bgColorBottomSafeArea = bgColor,
     disableTouch = false,
     noTopSafeArea = false,
     bottomBarComponent,
-    noBottomSafeArea = !!bottomBarComponent || false,
   } = props;
+
+  const bgColor = props.bgColor ?? schema.components.screenWrapper.background;
+  const bgColorBottomSafeArea = props.bgColorBottomSafeArea ?? bgColor;
+  const noBottomSafeArea = props.noBottomSafeArea ?? (!!bottomBarComponent || false);
 
   const safeAreaSides = ['left', 'right'] as Edge[];
   if (!header && !noTopSafeArea) {
@@ -55,7 +60,7 @@ export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
       <CCContainer
         flex={1}
         pointerEvents={disableTouch ? 'none' : 'auto'}
-        style={{ backgroundColor: colors[bgColor] }}>
+        style={{ backgroundColor: bgColor }}>
         {header}
         <SafeAreaView
           edges={safeAreaSides}
@@ -69,10 +74,7 @@ export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
         {!noBottomSafeArea && (
           <SafeAreaView
             edges={['bottom']}
-            style={[
-              style.bottomSafeArea,
-              { backgroundColor: colors[bgColorBottomSafeArea] },
-            ]}
+            style={[style.bottomSafeArea, { backgroundColor: bgColorBottomSafeArea }]}
           />
         )}
       </CCContainer>

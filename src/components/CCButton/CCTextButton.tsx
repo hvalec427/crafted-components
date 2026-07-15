@@ -1,19 +1,17 @@
 import React from 'react';
 import { ImageSourcePropType, ImageStyle, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
-import colors from '../../tokens/colors.json';
 import { CCText, TextAlign } from '../CCText/CCText';
 import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow, CCRowProps } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { typography } from '../../tokens/typography';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 import { CCTextButtonConstants } from './CCTextButtonStyles';
 
 const buttonStyle = StyleSheet.create({
-  opacity05: {
-    opacity: 0.5,
-  },
+  opacity05: { opacity: 0.5 },
 });
 
 export enum CCTextButtonSizesEnum {
@@ -32,7 +30,7 @@ interface CCTextButtonProps {
   iconStyle?: StyleProp<ImageStyle>;
   textType?: keyof typeof typography;
   alignment?: 'start' | 'center' | 'end';
-  textColor?: keyof typeof colors;
+  textColor?: string;
   numberOfLines?: number;
   size?: CCTextButtonSizesEnum;
   addPadding?: boolean;
@@ -40,15 +38,13 @@ interface CCTextButtonProps {
 
 const textButtonStyle = StyleSheet.create({
   text: {},
-  icon: {
-    marginRight: 5,
-  },
-  wrapper: {
-    justifyContent: 'center',
-  },
+  icon: { marginRight: 5 },
+  wrapper: { justifyContent: 'center' },
 });
 
 export const CCTextButton = (props: CCTextButtonProps) => {
+  const schema = useColorSchema();
+
   const {
     text,
     onPress,
@@ -58,7 +54,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
     iconStyle,
     textType = 'buttonMedium',
     alignment = 'center',
-    textColor = 'primaryBlue',
+    textColor = schema.components.text.link,
     numberOfLines,
     size = CCTextButtonSizesEnum.medium,
     addPadding = false,
@@ -91,9 +87,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
       style={[
         textButtonStyle.wrapper,
         { height: CCTextButtonConstants[size]?.height },
-        {
-          padding,
-        },
+        { padding },
         style,
       ]}
       disabled={disabled}
@@ -103,7 +97,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
           <CCIcon
             source={icon}
             style={[
-              { tintColor: colors[textColor] },
+              { tintColor: textColor },
               textButtonStyle.icon,
               iconStyle,
             ]}
@@ -114,7 +108,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
           type={textType}
           numberOfLines={numberOfLines}
           style={[
-            { color: colors[textColor] },
+            { color: textColor },
             textButtonStyle.text,
             disabled ? buttonStyle.opacity05 : {},
           ]}>

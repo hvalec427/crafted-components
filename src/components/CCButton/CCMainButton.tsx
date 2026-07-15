@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Animated, Pressable, StyleSheet } from 'react-native';
 
 import { ActivityIndicator } from 'react-native';
 import { CCText } from '../CCText/CCText';
 import { CCContainer } from '../CCLayout/CCContainer';
 import { CCRow } from '../CCLayout/CCRow';
-import colors from '../../tokens/colors.json';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 import {
-  CCMainButtonColorsConstants,
+  makeMainButtonColors,
+  makeMainButtonStyle,
   CCMainButtonConstants,
-  CCMainButtonStyle,
 } from './CCMainButtonStyle';
 
 export enum CCMainButtonTypes {
@@ -40,14 +40,10 @@ export interface CCMainButtonProps {
   onPress: (() => void) | undefined;
   onPressWhenDisabled?: (() => void) | undefined;
   type: keyof typeof CCMainButtonTypes;
-  textColor?: keyof typeof colors;
+  textColor?: string;
   disabled?: boolean;
-  leadingComponent?:
-    | React.ReactNode
-    | ((tintColor: keyof typeof colors) => React.ReactNode);
-  trailingComponent?:
-    | React.ReactNode
-    | ((tintColor: keyof typeof colors) => React.ReactNode);
+  leadingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);
+  trailingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);
   size?: CCButtonSizesEnum;
   flex?: number | string;
   flexGrow?: number | string;
@@ -55,7 +51,7 @@ export interface CCMainButtonProps {
   progressWidth?: Animated.AnimatedInterpolation<string | number>;
 }
 
-const style = StyleSheet.create({
+const layoutStyle = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -123,14 +119,13 @@ export const CCMainButton = (props: CCMainButtonProps) => {
     progressWidth = '0%',
   } = props;
 
+  const schema = useColorSchema();
+  const CCMainButtonStyle = useMemo(() => makeMainButtonStyle(schema), [schema]);
+  const CCMainButtonColorsConstants = useMemo(() => makeMainButtonColors(schema), [schema]);
+
   const hideText = loading && hideTextWhileLoading;
 
-  const currentHitSlop = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  };
+  const currentHitSlop = { top: 0, bottom: 0, left: 0, right: 0 };
 
   const onButtonPress = () => {
     if (disabled && onPressWhenDisabled) {
@@ -152,7 +147,7 @@ export const CCMainButton = (props: CCMainButtonProps) => {
           const isPressed = pressed && !!onPress && !disabled;
 
           return [
-            style.wrapper,
+            layoutStyle.wrapper,
             {
               height: CCMainButtonConstants[size]?.height,
               minHeight: CCMainButtonConstants[size]?.height,
@@ -191,25 +186,23 @@ export const CCMainButton = (props: CCMainButtonProps) => {
             <>
               <Animated.View
                 style={[
-                  style.progressBarWrapper,
+                  layoutStyle.progressBarWrapper,
                   CCMainButtonStyle[`${type}WrapperProgress`],
                   { width: progressWidth },
                 ]}
               />
               <CCContainer
                 style={{ height: '100%', justifyContent: 'center' }}
-                paddingHorizontal={
-                  CCMainButtonConstants[size]?.paddingHorizontal
-                }>
+                paddingHorizontal={CCMainButtonConstants[size]?.paddingHorizontal}>
                 {loadingIndicator && hideTextWhileLoading && loading && (
-                  <CCContainer style={style.onlyLoadingIndicatorWrapper}>
-                    <ActivityIndicator size="small" color={colors.white} />
+                  <CCContainer style={layoutStyle.onlyLoadingIndicatorWrapper}>
+                    <ActivityIndicator size="small" color={schema.components.button.loadingIndicator} />
                   </CCContainer>
                 )}
                 <CCRow gap={5} align={'center'} justify={'center'}>
                   {loadingIndicator && !hideTextWhileLoading && loading && (
-                    <CCContainer style={style.loadingIndicatorAndTextWrapper}>
-                      <ActivityIndicator size="small" color={colors.white} />
+                    <CCContainer style={layoutStyle.loadingIndicatorAndTextWrapper}>
+                      <ActivityIndicator size="small" color={schema.components.button.loadingIndicator} />
                     </CCContainer>
                   )}
 
@@ -223,10 +216,9 @@ export const CCMainButton = (props: CCMainButtonProps) => {
                       { textAlign: 'center' },
                       CCMainButtonStyle[`${type}Text`],
                       isPressed && CCMainButtonStyle[`${type}PressedText`],
-                      (disabled || loading) &&
-                        CCMainButtonStyle[`${type}DisabledText`],
-                      textColor && { color: colors[textColor] },
-                      hideText && loading && style.hidden,
+                      (disabled || loading) && CCMainButtonStyle[`${type}DisabledText`],
+                      textColor && { color: textColor },
+                      hideText && loading && layoutStyle.hidden,
                     ]}>
                     {loading && loadingText ? loadingText : text}
                   </CCText>
@@ -236,10 +228,10 @@ export const CCMainButton = (props: CCMainButtonProps) => {
                   {loadingIndicator && !hideTextWhileLoading && loading && (
                     <CCContainer
                       style={[
-                        style.loadingIndicatorAndTextWrapper,
-                        style.loadingIndicatorAndTextWrapperHidden,
+                        layoutStyle.loadingIndicatorAndTextWrapper,
+                        layoutStyle.loadingIndicatorAndTextWrapperHidden,
                       ]}>
-                      <ActivityIndicator size="small" color={colors.white} />
+                      <ActivityIndicator size="small" color={schema.components.button.loadingIndicator} />
                     </CCContainer>
                   )}
                 </CCRow>

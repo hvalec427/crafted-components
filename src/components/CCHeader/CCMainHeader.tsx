@@ -5,13 +5,13 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
-import colors from '../../tokens/colors.json';
 import { CCText } from '../CCText/CCText';
 import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { CCContainer } from '../CCLayout/CCContainer';
 import { icons } from '../../assets/icons';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 interface CCHeaderAction {
   onPress: () => void;
@@ -31,7 +31,6 @@ const style = StyleSheet.create({
   backIcon: {
     width: 20,
     height: 20,
-    tintColor: colors.textColorDark,
     transform: [{ rotate: '180deg' }],
   },
   hidden: {
@@ -95,7 +94,8 @@ interface CCMainHeaderProps {
   opacity?: number;
   numberOfLines?: number;
   paddingHorizontal?: number;
-  backgroundColor?: keyof typeof colors;
+  /** Background color — accepts a hex string or omit to use the schema surface color */
+  backgroundColor?: string;
   children?: React.ReactNode;
   overlay?: React.ReactNode;
   id?: string;
@@ -110,13 +110,16 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
     standalone = false,
     numberOfLines = 1,
     actions,
-    backgroundColor = 'transparent',
     floating = false,
     opacity = 1,
     children,
     overlay = null,
     id,
   } = props;
+
+  const schema = useColorSchema();
+  const header = schema.components.header;
+  const backgroundColor = props.backgroundColor ?? header.background;
 
   const safeAreaDimensions = useSafeAreaInsets();
 
@@ -132,7 +135,12 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
     return <CCContainer style={style.trailingComponentWrapper} />;
   }, [actions]);
 
-  const backArrow = <CCIcon source={icons.arrow} style={style.backIcon} />;
+  const backArrow = (
+    <CCIcon
+      source={icons.arrow}
+      style={[style.backIcon, { tintColor: header.backIcon }]}
+    />
+  );
 
   const topPadding = safeAreaDimensions.bottom > 0 ? 8 : 16;
   const body = (
@@ -142,7 +150,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
       style={[style.wrapper, { paddingTop: topPadding }]}>
       {onBackText && onBack && (
         <CCBackButton onBack={onBack}>
-          <CCText numberOfLines={1} type="body" color="textColorDark">
+          <CCText numberOfLines={1} type="body" color={header.title}>
             {onBackText}
           </CCText>
         </CCBackButton>
@@ -163,7 +171,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
         {!!label && (
           <CCText
             id={id ? `header-label-${id}` : 'header-label'}
-            color="textColorDark"
+            color={header.title}
             numberOfLines={numberOfLines}
             flexShrink={1}
             textAlign="center"
@@ -189,7 +197,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
         style.safeArea,
         floating && style.floating,
         !!opacity && { opacity },
-        backgroundColor && { backgroundColor: colors[backgroundColor] },
+        { backgroundColor },
       ]}>
       {body}
       {children}

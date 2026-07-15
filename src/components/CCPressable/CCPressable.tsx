@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Animated, Easing, StyleProp, ViewStyle } from 'react-native';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 
-import colors from '../../tokens/colors.json';
 import { testProps } from '../../utils/CCTestingId';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 export interface CCPressableProps {
   onPress: (() => void) | null;
@@ -17,13 +17,15 @@ export interface CCPressableProps {
     right?: number;
   };
   id?: string;
-  // (undefined | 'normal') | 'scale' | 'background_overlay_primary'
   type?: 'normal' | 'scale' | 'background_overlay_primary' | undefined;
-  overlayPrimaryInitialColor?: keyof typeof colors;
+  /** Hex color string for the unpressed overlay background */
+  overlayPrimaryInitialColor?: string;
   pointerEvents?: 'none' | 'auto' | 'box-none' | 'box-only' | undefined;
 }
 
 const CCPressable = (props: CCPressableProps) => {
+  const schema = useColorSchema();
+
   const {
     onPress = null,
     disabled = false,
@@ -32,7 +34,7 @@ const CCPressable = (props: CCPressableProps) => {
     id,
     type = undefined,
     pointerEvents,
-    overlayPrimaryInitialColor = 'white',
+    overlayPrimaryInitialColor = schema.surface,
   } = props;
 
   let { hitSlop } = props;
@@ -68,29 +70,17 @@ const CCPressable = (props: CCPressableProps) => {
 
   const handleProgress = (state: unknown) => {
     if (state === State.BEGAN) {
-      if (disabled) {
-        return;
-      }
-      if (type === 'scale') {
-        startProgress();
-      }
+      if (disabled) return;
+      if (type === 'scale') startProgress();
       setIsPressed(true);
     } else if (state === State.END) {
-      if (disabled || !onPress) {
-        return;
-      }
+      if (disabled || !onPress) return;
       onPress();
-      if (type === 'scale') {
-        resetProgress();
-      }
+      if (type === 'scale') resetProgress();
       setIsPressed(false);
     } else if (state === State.CANCELLED || state === State.FAILED) {
-      if (disabled) {
-        return;
-      }
-      if (type === 'scale') {
-        resetProgress();
-      }
+      if (disabled) return;
+      if (type === 'scale') resetProgress();
       setIsPressed(false);
     }
   };
@@ -116,7 +106,7 @@ const CCPressable = (props: CCPressableProps) => {
           type === 'scale' && { transform: [{ scale }] },
           type === 'background_overlay_primary' && {
             backgroundColor: isPressed
-              ? '#DAF4FF' // update to correct color
+              ? schema.components.button.primaryLightBg
               : overlayPrimaryInitialColor,
           },
         ]}>
