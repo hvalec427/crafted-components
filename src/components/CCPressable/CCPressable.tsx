@@ -106,7 +106,7 @@ const CCPressable = (props: CCPressableProps) => {
           type === 'scale' && { transform: [{ scale }] },
           type === 'background_overlay_primary' && {
             backgroundColor: isPressed
-              ? schema.components.button.primaryLightBg
+              ? schema.button.primaryLightBg
               : overlayPrimaryInitialColor,
           },
         ]}>

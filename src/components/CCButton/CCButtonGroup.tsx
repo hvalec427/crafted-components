@@ -46,7 +46,7 @@ export const CCButtonGroup = (props: CCButtonGroupProps) => {
     noBottomPadding = false,
   } = props;
 
-  const bgColor = props.bgColor ?? schema.components.buttonGroup.background;
+  const bgColor = props.bgColor ?? schema.buttonGroup.background;
 
   const safeAreaDimensions = useSafeAreaInsets();
 

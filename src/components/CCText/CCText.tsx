@@ -55,7 +55,7 @@ export const CCText = (props: CCTextProps) => {
       onPress={onPress ? onPress : undefined}
       {...(numberOfLines && { numberOfLines })}
       style={[
-        { color: schema.components.text.primary },
+        { color: schema.textColor.primary },
         type && { ...typography[type] },
         color && { color },
         textAlign && { textAlign },

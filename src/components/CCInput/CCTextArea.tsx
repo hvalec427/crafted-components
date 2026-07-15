@@ -42,7 +42,7 @@ export const CCTextArea = (props: CCTextAreaProps) => {
   } = props;
 
   const schema = useColorSchema();
-  const ic = schema.components.input;
+  const ic = schema.input;
 
   const initialWrapperHeight = 21;
 

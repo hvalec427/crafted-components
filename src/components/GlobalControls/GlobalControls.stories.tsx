@@ -73,11 +73,11 @@ const GlobalControlsComponent = () => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={{ flexDirection: 'row', gap: 8 }}>
             {SCHEMAS.find(s => s.name === active) && (
-              Object.entries(
+              (Object.entries(
                 active === 'default' ? defaultBase :
                   active === 'ocean' ? oceanBase :
                     sunsetBase
-              ).map(([key, value]) => (
+              ) as [string, string][]).filter(([, v]) => typeof v === 'string').map(([key, value]) => (
                 <View key={key} style={{ alignItems: 'center', gap: 4 }}>
                   <View style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: value }} />
                   <Text style={{ fontSize: 9, color: '#9C9EA3', textTransform: 'capitalize' }}>{key}</Text>

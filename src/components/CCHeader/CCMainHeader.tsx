@@ -118,7 +118,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
   } = props;
 
   const schema = useColorSchema();
-  const header = schema.components.header;
+  const header = schema.header;
   const backgroundColor = props.backgroundColor ?? header.background;
 
   const safeAreaDimensions = useSafeAreaInsets();

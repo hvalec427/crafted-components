@@ -54,7 +54,7 @@ export const CCTextButton = (props: CCTextButtonProps) => {
     iconStyle,
     textType = 'buttonMedium',
     alignment = 'center',
-    textColor = schema.components.text.link,
+    textColor = schema.textColor.link,
     numberOfLines,
     size = CCTextButtonSizesEnum.medium,
     addPadding = false,

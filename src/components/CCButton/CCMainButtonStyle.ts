@@ -9,7 +9,7 @@ export const CCMainButtonConstants: {
 };
 
 export const makeMainButtonColors = (schema: ColorSchema) => {
-  const b = schema.components.button;
+  const b = schema.button;
   return {
     primary: {
       mainTextColor:     b.primaryText,
@@ -55,7 +55,7 @@ export const makeMainButtonColors = (schema: ColorSchema) => {
 };
 
 export const makeMainButtonStyle = (schema: ColorSchema): Record<string, object> => {
-  const b = schema.components.button;
+  const b = schema.button;
   return {
     primaryWrapper:         { backgroundColor: b.primaryBg,             borderColor: b.primaryBorder,             borderWidth: 1 },
     primaryPressedWrapper:  { backgroundColor: b.primaryPressedBg,      borderColor: b.primaryPressedBg },

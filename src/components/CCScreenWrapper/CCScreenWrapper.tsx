@@ -41,7 +41,7 @@ export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
     bottomBarComponent,
   } = props;
 
-  const bgColor = props.bgColor ?? schema.components.screenWrapper.background;
+  const bgColor = props.bgColor ?? schema.screenWrapper.background;
   const bgColorBottomSafeArea = props.bgColorBottomSafeArea ?? bgColor;
   const noBottomSafeArea = props.noBottomSafeArea ?? (!!bottomBarComponent || false);
 

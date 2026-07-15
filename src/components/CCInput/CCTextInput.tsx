@@ -276,8 +276,8 @@ const style = StyleSheet.create({
 export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
   (props, ref) => {
     const schema = useColorSchema();
-    const ic = schema.components.input;
-    const neutral = schema.components.neutral;
+    const ic = schema.input;
+    const neutral = schema.neutral;
 
     const {
       controller,

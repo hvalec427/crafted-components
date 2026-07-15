@@ -9,7 +9,7 @@ export const RoundButtonSizes = StyleSheet.create({
 });
 
 export const makeRoundButtonStyle = (schema: ColorSchema): Record<string, object> => {
-  const b = schema.components.roundButton;
+  const b = schema.roundButton;
   return {
     primaryWrapper:         { backgroundColor: b.primaryBg,            borderColor: b.primaryBorder,              borderWidth: 1 },
     primaryWrapperDisabled: { backgroundColor: b.primaryDisabledBg,    borderColor: b.primaryDisabledBorder,      borderWidth: 1 },

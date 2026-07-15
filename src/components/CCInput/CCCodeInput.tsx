@@ -61,7 +61,7 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
   } = props;
 
   const schema = useColorSchema();
-  const ci = schema.components.codeInput;
+  const ci = schema.codeInput;
 
   const inputRef = React.useRef<Input>(null);
 
