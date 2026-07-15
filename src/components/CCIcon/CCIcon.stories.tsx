@@ -4,7 +4,7 @@ import { CCIcon } from './CCIcon';
 import { icons } from '../../assets/icons';
 
 const meta = {
-  title: 'Media/CCIcon',
+  title: 'Media/Icon',
   component: CCIcon,
   parameters: { layout: 'centered' },
   argTypes: {

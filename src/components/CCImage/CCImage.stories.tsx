@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CCImage } from './CCImage';
 
 const meta = {
-  title: 'Media/CCImage',
+  title: 'Media/Image',
   component: CCImage,
   parameters: { layout: 'centered' },
   argTypes: {

@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CCText } from './CCText';
 
 const meta = {
-  title: 'Components/CCText',
+  title: 'Components/Text',
   component: CCText,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof CCText>;

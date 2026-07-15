@@ -7,7 +7,7 @@ import { CCScroller } from './CCScroller';
 import { CCText } from '../CCText/CCText';
 
 const meta = {
-  title: 'CCScroller/CCScroller',
+  title: 'Scroller/Scroller',
   component: CCScroller,
   argTypes: {
     avoidKeyboard: { control: 'boolean' },

@@ -10,7 +10,7 @@ import { icons } from '../../assets/icons';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Buttons/CCButton',
+  title: 'Buttons/Button',
   component: CCMainButton,
   parameters: { layout: 'padded' },
 } satisfies Meta<typeof CCMainButton>;

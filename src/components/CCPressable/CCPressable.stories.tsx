@@ -7,7 +7,7 @@ import { CCPressableOpacity } from './CCPressableOpacity';
 import { CCText } from '../CCText/CCText';
 
 const meta = {
-  title: 'Components/CCPressable',
+  title: 'Components/Pressable',
   component: CCPressableOpacity,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof CCPressableOpacity>;

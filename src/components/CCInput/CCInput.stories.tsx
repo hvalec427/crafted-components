@@ -8,7 +8,7 @@ import { CCCodeInput } from './CCCodeInput';
 import { useTextInputForm } from './CCTextInputFormHook';
 
 const meta = {
-  title: 'Input/CCTextInput',
+  title: 'Input/TextInput',
   component: CCTextInput,
   parameters: { layout: 'centered' },
   args: {

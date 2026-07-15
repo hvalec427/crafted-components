@@ -4,7 +4,7 @@ import { fn } from '@storybook/test';
 import { CCMainHeader } from './CCMainHeader';
 
 const meta = {
-  title: 'CCHeader/CCMainHeader',
+  title: 'Header/MainHeader',
   component: CCMainHeader,
   argTypes: {
     standalone: { control: 'boolean' },

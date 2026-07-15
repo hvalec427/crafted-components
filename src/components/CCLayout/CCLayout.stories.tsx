@@ -7,7 +7,7 @@ import { CCRow } from './CCRow';
 import { CCText } from '../CCText/CCText';
 
 const meta = {
-  title: 'Layout/CCLayout',
+  title: 'Layout/Layout',
   component: CCContainer,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof CCContainer>;
