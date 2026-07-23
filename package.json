@@ -9,16 +9,21 @@
   "files": [
     "src",
     "lib",
+    "snippets",
     "!**/__tests__",
     "!**/*.spec.*",
     "!**/*.test.*",
     "src/**/*.stories.*"
   ],
+  "bin": {
+    "crafted-snippet": "snippets/copy.mjs"
+  },
   "scripts": {
     "build": "bob build",
     "prepare": "bob build && yarn link",
     "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "lint:fix": "eslint src --fix",
+    "snippet": "node snippets/copy.mjs"
   },
   "keywords": [
     "react-native",
@@ -33,6 +38,7 @@
     "react-native-safe-area-context": ">=4.0.0"
   },
   "dependencies": {
+    "@clack/prompts": "^1.7.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5"
   },
   "devDependencies": {
