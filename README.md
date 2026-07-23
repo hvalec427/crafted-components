@@ -44,20 +44,58 @@ export default function App() {
 }
 ```
 
-## Initializing with custom brand colors
+## Initializing
 
-Call `initCraftedComponents` before your app renders to set custom brand colors. Any keys you omit fall back to the default theme.
+Call `initCraftedComponents` before your app renders to set custom brand colors and register images/icons. All keys are optional — anything you omit falls back to the built-in defaults.
 
 ```ts
 import { initCraftedComponents } from 'crafted-components';
 
 initCraftedComponents({
-  primary: '#E63946',
-  secondary: '#457B9D',
+  colors: {
+    primary: '#E63946',
+    secondary: '#457B9D',
+  },
+  icons: {
+    arrow: require('./assets/icons/arrow.png'),
+    close: 'https://cdn.example.com/icons/close.png',
+  },
+  images: {
+    logo: require('./assets/images/logo.png'),
+    hero: 'https://cdn.example.com/images/hero.jpg',
+  },
 });
 ```
 
-All component-level tokens (button states, input borders, header colors, etc.) are automatically derived from the base colors you provide.
+Color tokens (button states, input borders, header colors, etc.) are automatically derived from the base colors you provide. Icon and image values are `CCImageSource` — either a local `require()` result or a remote URL string.
+
+### Using registered assets
+
+Access assets anywhere inside `CraftedProvider` via the `useAssets` hook:
+
+```tsx
+import { useAssets, CCIcon, CCImage } from 'crafted-components';
+
+function MyComponent() {
+  const { icons, images } = useAssets();
+
+  return (
+    <>
+      <CCIcon source={icons.arrow} width={24} height={24} tintColor="#E63946" />
+      <CCImage source={images.logo} width={120} aspectRatio={3} />
+    </>
+  );
+}
+```
+
+### Using `CCIcon` and `CCImage` with an inline source
+
+Both components also accept a `CCImageSource` directly, bypassing the asset store:
+
+```tsx
+<CCIcon source={require('./assets/icons/star.png')} width={20} height={20} />
+<CCImage source="https://cdn.example.com/photo.jpg" width="100%" aspectRatio={16 / 9} />
+```
 
 ## Switching themes
 

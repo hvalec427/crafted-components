@@ -4,3 +4,6 @@ export type { BaseColors, ColorSchema, ColorSchemaName } from './colorSchema';
 export { ColorSchemaProvider, useColorSchema } from './ColorSchemaContext';
 export { CraftedProvider } from './CraftedProvider';
 export { schemaStore, initCraftedComponents } from './schemaStore';
+export type { AssetSchema, BuiltInIcons, BuiltInImages } from './assetSchema';
+export { AssetProvider, useAssets } from './AssetContext';
+export { assetStore, initCraftedAssets } from './assetStore';

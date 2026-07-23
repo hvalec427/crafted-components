@@ -1,4 +1,9 @@
+import type { CCImageSource } from '../utils/CCImageSource';
 import type { BaseColors, ColorSchema, ColorSchemaName } from './colorSchema';
+import type { BuiltInIcons, BuiltInImages } from './assetSchema';
+import { initCraftedAssets } from './assetStore';
+import { useAssets as _useAssets } from './AssetContext';
+import { useColorSchema as _useColorSchema } from './ColorSchemaContext';
 import defaultSchema from './schemas/default.json';
 import oceanSchema from './schemas/ocean.json';
 import sunsetSchema from './schemas/sunset.json';
@@ -57,8 +62,30 @@ export const schemaStore = {
   },
 };
 
-export function initCraftedComponents(colors: Partial<BaseColors>): void {
-  const merged = { ...defaultSchema, ...colors };
-  _current = resolveTokens(merged as Record<string, unknown>);
-  _listeners.forEach(fn => fn(_current));
+export function initCraftedComponents<
+  TIcons extends Record<string, CCImageSource> = Record<never, never>,
+  TImages extends Record<string, CCImageSource> = Record<never, never>
+>({ colors, icons, images, components }: {
+  colors?: Partial<BaseColors>;
+  icons?: TIcons;
+  images?: TImages;
+  components?: Record<string, unknown>;
+} = {}): {
+  useAssets: () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages };
+  useColorSchema: () => ColorSchema;
+} {
+  if (colors) {
+    const merged = { ...defaultSchema, ...colors };
+    _current = resolveTokens(merged as Record<string, unknown>);
+    _listeners.forEach(fn => fn(_current));
+  }
+
+  if (icons || images) {
+    initCraftedAssets({ icons, images });
+  }
+
+  return {
+    useAssets: _useAssets as () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages },
+    useColorSchema: _useColorSchema,
+  };
 }

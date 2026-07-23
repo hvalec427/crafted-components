@@ -3,13 +3,14 @@ import {
   DimensionValue,
   Image,
   ImageResizeMode,
-  ImageSourcePropType,
   ImageStyle,
   StyleProp,
 } from 'react-native';
 
+import { CCImageSource, normalizeCCImageSource } from '../../utils/CCImageSource';
+
 export interface CCIconProps {
-  source: ImageSourcePropType;
+  source: CCImageSource;
   width?: DimensionValue;
   height?: DimensionValue;
   resizeMode?: ImageResizeMode;
@@ -28,7 +29,7 @@ export const CCIcon = ({
 }: CCIconProps) => (
   <Image
     resizeMode={resizeMode}
-    source={source}
+    source={normalizeCCImageSource(source)}
     style={[
       tintColor ? { tintColor } : {},
       width ? { width } : {},

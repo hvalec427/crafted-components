@@ -22,3 +22,5 @@ export * from './components/CCScroller';
 // Utils
 export { testProps } from './utils/CCTestingId';
 export type { FlexAlignType, JustifyContentType } from './utils/CCLayoutEnums';
+export type { CCImageSource } from './utils/CCImageSource';
+export { normalizeCCImageSource } from './utils/CCImageSource';

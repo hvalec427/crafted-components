@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "bob build",
-    "prepare": "bob build",
+    "prepare": "bob build && yarn link",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
   },

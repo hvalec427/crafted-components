@@ -10,8 +10,8 @@ import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { CCContainer } from '../CCLayout/CCContainer';
-import { icons } from '../../assets/icons';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useAssets } from '../../tokens/AssetContext';
 
 interface CCHeaderAction {
   onPress: () => void;
@@ -118,6 +118,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
   } = props;
 
   const schema = useColorSchema();
+  const { icons } = useAssets();
   const header = schema.header;
   const backgroundColor = props.backgroundColor ?? header.background;
 
@@ -162,7 +163,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
         </CCBackButton>
       )}
       {!onBack && (
-        <CCBackButton onBack={() => {}} hidden>
+        <CCBackButton onBack={() => { }} hidden>
           {backArrow}
         </CCBackButton>
       )}

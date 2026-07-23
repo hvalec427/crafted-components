@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { DimensionValue, Image, ImageResizeMode } from 'react-native';
 
+import { CCImageSource, normalizeCCImageSource } from '../../utils/CCImageSource';
+
 export interface CCImageProps {
-  url: string;
+  /** Local asset (require()) or remote URL string. Takes priority over `url`. */
+  source?: CCImageSource;
+  /** @deprecated Use `source` instead. */
+  url?: string;
   width?: DimensionValue;
   height?: DimensionValue;
   aspectRatio?: number;
@@ -13,6 +18,7 @@ export interface CCImageProps {
 }
 
 export const CCImage = ({
+  source,
   url,
   width,
   height,
@@ -20,16 +26,20 @@ export const CCImage = ({
   tintColor,
   resizeMode = 'contain',
   opacity = 1,
-}: CCImageProps) => (
-  <Image
-    source={{ uri: url }}
-    resizeMode={resizeMode}
-    style={[
-      width ? { width } : {},
-      aspectRatio ? { aspectRatio } : {},
-      height ? { height } : {},
-      opacity !== 1 ? { opacity } : {},
-      tintColor ? { tintColor } : {},
-    ]}
-  />
-);
+}: CCImageProps) => {
+  const resolvedSource = source != null ? normalizeCCImageSource(source) : { uri: url };
+
+  return (
+    <Image
+      source={resolvedSource}
+      resizeMode={resizeMode}
+      style={[
+        width ? { width } : {},
+        aspectRatio ? { aspectRatio } : {},
+        height ? { height } : {},
+        opacity !== 1 ? { opacity } : {},
+        tintColor ? { tintColor } : {},
+      ]}
+    />
+  );
+};
