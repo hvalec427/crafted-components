@@ -1,9 +1,10 @@
 export { typography, CCFontFamilies } from './typography';
 export { shadows } from './shadows';
-export type { BaseColors, ColorSchema, ColorSchemaName } from './colorSchema';
+export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial } from './colorSchema';
 export { ColorSchemaProvider, useColorSchema } from './ColorSchemaContext';
 export { CraftedProvider } from './CraftedProvider';
 export { schemaStore, initCraftedComponents } from './schemaStore';
 export type { AssetSchema, BuiltInIcons, BuiltInImages } from './assetSchema';
+export type { ComponentSchema } from './componentSchema';
 export { AssetProvider, useAssets } from './AssetContext';
 export { assetStore, initCraftedAssets } from './assetStore';

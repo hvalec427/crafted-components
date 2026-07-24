@@ -1,6 +1,8 @@
 import type { CCImageSource } from '../utils/CCImageSource';
-import type { BaseColors, ColorSchema, ColorSchemaName } from './colorSchema';
+import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
+import type { ComponentSchema } from './componentSchema';
+import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
 import { initCraftedAssets } from './assetStore';
 import { useAssets as _useAssets } from './AssetContext';
 import { useColorSchema as _useColorSchema } from './ColorSchemaContext';
@@ -36,6 +38,18 @@ function resolveTokens(raw: Record<string, unknown>): ColorSchema {
   return resolve(raw) as ColorSchema;
 }
 
+function deepMerge(base: Record<string, unknown>, overrides: Record<string, unknown>): Record<string, unknown> {
+  const result: Record<string, unknown> = { ...base };
+  for (const [key, val] of Object.entries(overrides)) {
+    if (val && typeof val === 'object' && !Array.isArray(val) && typeof result[key] === 'object' && result[key] !== null) {
+      result[key] = deepMerge(result[key] as Record<string, unknown>, val as Record<string, unknown>);
+    } else {
+      result[key] = val;
+    }
+  }
+  return result;
+}
+
 const schemas: Record<ColorSchemaName, ColorSchema> = {
   default: resolveTokens(defaultSchema as Record<string, unknown>),
   ocean:   resolveTokens(oceanSchema as Record<string, unknown>),
@@ -66,22 +80,31 @@ export function initCraftedComponents<
   TIcons extends Record<string, CCImageSource> = Record<never, never>,
   TImages extends Record<string, CCImageSource> = Record<never, never>
 >({ colors, icons, images, components }: {
-  colors?: Partial<BaseColors>;
+  colors?: DeepPartial<ColorSchema>;
   icons?: TIcons;
   images?: TImages;
-  components?: Record<string, unknown>;
+  components?: Partial<ComponentSchema>;
 } = {}): {
   useAssets: () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages };
   useColorSchema: () => ColorSchema;
 } {
   if (colors) {
-    const merged = { ...defaultSchema, ...colors };
-    _current = resolveTokens(merged as Record<string, unknown>);
+    const merged = deepMerge(defaultSchema as Record<string, unknown>, colors as Record<string, unknown>);
+    _current = resolveTokens(merged);
     _listeners.forEach(fn => fn(_current));
   }
 
   if (icons || images) {
     initCraftedAssets({ icons, images });
+  }
+
+  if (components?.CCMainButton?.sizes) {
+    const sizes = components.CCMainButton.sizes;
+    for (const [size, overrides] of Object.entries(sizes) as [string, { height?: number; paddingHorizontal?: number }][]) {
+      if (CCMainButtonConstants[size]) {
+        Object.assign(CCMainButtonConstants[size], overrides);
+      }
+    }
   }
 
   return {
