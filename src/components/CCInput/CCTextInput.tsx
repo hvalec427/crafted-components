@@ -16,7 +16,7 @@ import {
   View,
 } from 'react-native';
 
-import { CCFontFamilies, typography } from '../../tokens/typography';
+import { typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
@@ -239,7 +239,7 @@ const style = StyleSheet.create({
     textAlignVertical: 'center',
   },
   inputFieldBold: {
-    fontFamily: CCFontFamilies.SemiBold,
+    fontWeight: '600',
   },
   inputFieldMultiline: {
     height: undefined,
@@ -253,11 +253,11 @@ const style = StyleSheet.create({
   },
   error: {
     ...typography.caption,
-    fontFamily: CCFontFamilies.SemiBold,
+    fontWeight: '600',
   },
   warning: {
     ...typography.caption,
-    fontFamily: CCFontFamilies.SemiBold,
+    fontWeight: '600',
   },
   placeholderLabelWrapper: {
     zIndex: 10,

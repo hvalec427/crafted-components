@@ -1,4 +1,4 @@
-export { typography, CCFontFamilies } from './typography';
+export { typography } from './typography';
 export { shadows } from './shadows';
 export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ThemeColor, RawColorSchema } from './colorSchema';
 export { ColorSchemaProvider, useColorSchema } from './ColorSchemaContext';
