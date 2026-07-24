@@ -4,6 +4,7 @@ import { State, TapGestureHandler } from 'react-native-gesture-handler';
 
 import { testProps } from '../../utils/CCTestingId';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 export interface CCPressableProps {
   onPress: (() => void) | null;
@@ -18,8 +19,7 @@ export interface CCPressableProps {
   };
   id?: string;
   type?: 'normal' | 'scale' | 'background_overlay_primary' | undefined;
-  /** Hex color string for the unpressed overlay background */
-  overlayPrimaryInitialColor?: string;
+  overlayPrimaryInitialColor?: ThemeColor;
   pointerEvents?: 'none' | 'auto' | 'box-none' | 'box-only' | undefined;
 }
 

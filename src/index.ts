@@ -3,6 +3,7 @@ export * from './tokens';
 
 // Layout primitives
 export * from './components/CCLayout';
+export * from './components/CCBox';
 export * from './components/CCText';
 export * from './components/CCIcon';
 export * from './components/CCImage';

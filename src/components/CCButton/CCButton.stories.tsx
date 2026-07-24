@@ -8,6 +8,7 @@ import { CCTextButton } from './CCTextButton';
 import { CCText } from '../CCText/CCText';
 import { icons } from '../../assets/icons';
 import { fn } from '@storybook/test';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Buttons/Button',
@@ -23,12 +24,15 @@ const SizeRow = ({
 }: {
   label: string;
   children: React.ReactNode;
-}) => (
-  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-    <CCText type="caption" color="mediumGray" style={{ width: 48 }}>{label}</CCText>
-    <View style={{ flex: 1, flexDirection: 'row', gap: 12 }}>{children}</View>
-  </View>
-);
+}) => {
+  const schema = useColorSchema();
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+      <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{label}</CCText>
+      <View style={{ flex: 1, flexDirection: 'row', gap: 12 }}>{children}</View>
+    </View>
+  );
+};
 
 const Col = ({ children }: { children: React.ReactNode }) => (
   <View style={{ gap: 12, width: '100%' }}>{children}</View>
@@ -102,21 +106,26 @@ export const Secondary: StoryObj = {
 
 // ─── Round ──────────────────────────────────────────────────────────────────
 
+const RoundLabel = ({ children }: { children: string }) => {
+  const schema = useColorSchema();
+  return <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{children}</CCText>;
+};
+
 export const Round: StoryObj = {
   render: () => (
     <Col>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-        <CCText type="caption" color="mediumGray" style={{ width: 48 }}>Large</CCText>
+        <RoundLabel>Large</RoundLabel>
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.large} icon={icons.arrow} onPress={fn()} />
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.large} icon={icons.arrow} onPress={fn()} disabled />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-        <CCText type="caption" color="mediumGray" style={{ width: 48 }}>Medium</CCText>
+        <RoundLabel>Medium</RoundLabel>
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.medium} icon={icons.arrow} onPress={fn()} />
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.medium} icon={icons.arrow} onPress={fn()} disabled />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-        <CCText type="caption" color="mediumGray" style={{ width: 48 }}>Small</CCText>
+        <RoundLabel>Small</RoundLabel>
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} />
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} disabled />
       </View>

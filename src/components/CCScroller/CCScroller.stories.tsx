@@ -5,6 +5,7 @@ import { fn } from '@storybook/test';
 
 import { CCScroller } from './CCScroller';
 import { CCText } from '../CCText/CCText';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Scroller/Scroller',
@@ -20,18 +21,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ScrollContent = () => (
-  <>
-    {Array.from({ length: 20 }, (_, i) => (
-      <View key={i} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
-        <CCText type="bodyReg">Scroll item {i + 1}</CCText>
-        <CCText type="subtextReg" color="mediumGray">
-          Supporting detail for item {i + 1}
-        </CCText>
-      </View>
-    ))}
-  </>
-);
+const ScrollContent = () => {
+  const schema = useColorSchema();
+  return (
+    <>
+      {Array.from({ length: 20 }, (_, i) => (
+        <View key={i} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
+          <CCText type="bodyReg">Scroll item {i + 1}</CCText>
+          <CCText type="subtextReg" color={schema.neutral.mediumGray}>
+            Supporting detail for item {i + 1}
+          </CCText>
+        </View>
+      ))}
+    </>
+  );
+};
 
 export const Default: Story = {
   args: {

@@ -7,6 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 const style = StyleSheet.create({
   scroller: {
@@ -19,8 +20,7 @@ interface CCScrollerProps {
   avoidKeyboard?: boolean;
   paddingTop?: number;
   paddingBottom?: number;
-  /** Background color — accepts a hex string */
-  bgColor?: string;
+  bgColor?: ThemeColor;
   refetch?: Function;
   fetchMore?: Function;
   scrollViewRef?: RefObject<ScrollView>;

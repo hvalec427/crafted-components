@@ -4,6 +4,7 @@ import { StyleProp, Text, TextStyle } from 'react-native';
 import { typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 export type TextAlign =
   | 'auto'
@@ -17,8 +18,7 @@ export interface CCTextProps {
   children?: string | React.ReactNode | undefined;
   type?: keyof typeof typography;
   style?: StyleProp<TextStyle>;
-  /** Hex color string — overrides the schema text color */
-  color?: string;
+  color?: ThemeColor;
   flex?: number;
   flexGrow?: number;
   flexShrink?: number;

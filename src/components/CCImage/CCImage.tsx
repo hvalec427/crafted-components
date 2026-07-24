@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DimensionValue, Image, ImageResizeMode } from 'react-native';
 
 import { CCImageSource, normalizeCCImageSource } from '../../utils/CCImageSource';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 export interface CCImageProps {
   /** Local asset (require()) or remote URL string. Takes priority over `url`. */
@@ -12,8 +13,7 @@ export interface CCImageProps {
   height?: DimensionValue;
   aspectRatio?: number;
   resizeMode?: ImageResizeMode;
-  /** Hex color string for the image tint */
-  tintColor?: string;
+  tintColor?: ThemeColor;
   opacity?: number;
 }
 

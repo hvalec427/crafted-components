@@ -2,7 +2,7 @@
 import * as p from '@clack/prompts';
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -10,6 +10,54 @@ function getSnippets() {
   return readdirSync(__dirname, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => e.name);
+}
+
+async function promptSnippetConfig(configPath) {
+  const { default: fields } = await import(pathToFileURL(configPath).href);
+  const values = {};
+
+  for (const field of fields) {
+    let answer;
+
+    if (field.type === 'select') {
+      answer = await p.select({
+        message: field.message,
+        options: field.options.map((o) => ({
+          value: o,
+          label: o,
+          hint: o === field.default ? 'default' : undefined,
+        })),
+        initialValue: field.default,
+      });
+    } else {
+      answer = await p.text({
+        message: field.message,
+        defaultValue: String(field.default),
+        placeholder: String(field.default),
+      });
+    }
+
+    if (p.isCancel(answer)) {
+      p.cancel('Cancelled.');
+      process.exit(0);
+    }
+
+    values[field.key] = { value: answer || String(field.default), type: field.type, default: field.default };
+  }
+
+  return values;
+}
+
+function applyConfig(content, configValues) {
+  let result = content;
+  for (const [key, { value, type, default: def }] of Object.entries(configValues)) {
+    if (type === 'number') {
+      result = result.replace(`${key}: ${def}`, `${key}: ${value}`);
+    } else {
+      result = result.replace(`${key}: '${def}'`, `${key}: '${value}'`);
+    }
+  }
+  return result;
 }
 
 async function main() {
@@ -54,6 +102,13 @@ async function main() {
   }
 
   const newName = rename.trim() || snippet;
+
+  const configPath = join(__dirname, snippet, 'config.mjs');
+  let configValues = {};
+  if (existsSync(configPath)) {
+    configValues = await promptSnippetConfig(configPath);
+  }
+
   const srcFile = join(__dirname, snippet, `${snippet}.tsx`);
   const dest = resolve(destination.trim());
   const destFile = dest.endsWith('.tsx') ? dest : join(dest, `${newName}.tsx`);
@@ -62,6 +117,10 @@ async function main() {
 
   if (newName !== snippet) {
     content = content.replaceAll(snippet, newName);
+  }
+
+  if (Object.keys(configValues).length > 0) {
+    content = applyConfig(content, configValues);
   }
 
   if (!existsSync(dirname(destFile))) {

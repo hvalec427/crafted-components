@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 
 import { CCImageSource, normalizeCCImageSource } from '../../utils/CCImageSource';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 export interface CCIconProps {
   source: CCImageSource;
   width?: DimensionValue;
   height?: DimensionValue;
   resizeMode?: ImageResizeMode;
-  /** Hex color string for the icon tint */
-  tintColor?: string;
+  tintColor?: ThemeColor;
   style?: StyleProp<ImageStyle>;
 }
 

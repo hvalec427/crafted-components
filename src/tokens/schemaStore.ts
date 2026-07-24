@@ -1,5 +1,5 @@
 import type { CCImageSource } from '../utils/CCImageSource';
-import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial } from './colorSchema';
+import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, RawColorSchema } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
 import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
@@ -80,7 +80,7 @@ export function initCraftedComponents<
   TIcons extends Record<string, CCImageSource> = Record<never, never>,
   TImages extends Record<string, CCImageSource> = Record<never, never>
 >({ colors, icons, images, components }: {
-  colors?: DeepPartial<ColorSchema>;
+  colors?: DeepPartial<RawColorSchema>;
   icons?: TIcons;
   images?: TImages;
   components?: Partial<ComponentSchema>;

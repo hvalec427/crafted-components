@@ -4,6 +4,7 @@ import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
 import { CCContainer } from '../CCLayout/CCContainer';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 const style = StyleSheet.create({
   safeArea: {
@@ -18,10 +19,8 @@ const style = StyleSheet.create({
 interface CCScreenWrapperProps {
   children: React.ReactNode;
   header?: React.ReactNode;
-  /** Background color — accepts a hex string or omit to use the schema background color */
-  bgColor?: string;
-  /** Bottom safe area color — defaults to bgColor */
-  bgColorBottomSafeArea?: string;
+  bgColor?: ThemeColor;
+  bgColorBottomSafeArea?: ThemeColor;
   disableTouch?: boolean;
   noTopSafeArea?: boolean;
   noBottomSafeArea?: boolean;

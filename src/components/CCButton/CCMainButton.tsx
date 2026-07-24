@@ -12,6 +12,7 @@ import {
   makeMainButtonStyle,
   CCMainButtonConstants,
 } from './CCMainButtonStyle';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 export enum CCMainButtonTypes {
   primary = 'primary',
@@ -40,7 +41,7 @@ export interface CCMainButtonProps {
   onPress: (() => void) | undefined;
   onPressWhenDisabled?: (() => void) | undefined;
   type: keyof typeof CCMainButtonTypes;
-  textColor?: string;
+  textColor?: ThemeColor;
   disabled?: boolean;
   leadingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);
   trailingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);

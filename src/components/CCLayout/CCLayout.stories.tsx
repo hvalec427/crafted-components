@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CCContainer } from './CCContainer';
 import { CCRow } from './CCRow';
 import { CCText } from '../CCText/CCText';
+import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Layout/Layout',
@@ -20,9 +21,10 @@ const Box = ({ color = '#BAEBFF', label, height }: { color?: string; label?: str
   </View>
 );
 
-const Label = ({ children }: { children: string }) => (
-  <CCText type="labelCapsMed" color="mediumGray" style={{ marginBottom: 4 }}>{children}</CCText>
-);
+const Label = ({ children }: { children: string }) => {
+  const schema = useColorSchema();
+  return <CCText type="labelCapsMed" color={schema.neutral.mediumGray} style={{ marginBottom: 4 }}>{children}</CCText>;
+};
 
 export const Container: StoryObj = {
   render: () => (
@@ -112,13 +114,18 @@ export const RowJustify: StoryObj = {
   ),
 };
 
+const SpacerLabel = ({ children }: { children: string }) => {
+  const schema = useColorSchema();
+  return <CCText type="labelCapsMed" color={schema.neutral.mediumGray}>{children}</CCText>;
+};
+
 export const SpacerVertical: StoryObj = {
   render: () => (
     <CCContainer padding={12} style={{ backgroundColor: '#F7FAFC', borderRadius: 8 }}>
       <Box label="Above" />
       <View style={{ height: 32, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ position: 'absolute', top: 0, bottom: 0, left: 8, right: 8, borderWidth: 1, borderStyle: 'dashed', borderColor: '#A0AEC0', borderRadius: 2 }} />
-        <CCText type="labelCapsMed" color="mediumGray">32px</CCText>
+        <SpacerLabel>32px</SpacerLabel>
       </View>
       <Box label="Below" color="#93ECE5" />
     </CCContainer>
@@ -131,7 +138,7 @@ export const SpacerHorizontal: StoryObj = {
       <Box label="Left" />
       <View style={{ width: 40, height: 36, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ position: 'absolute', top: 4, bottom: 4, left: 0, right: 0, borderWidth: 1, borderStyle: 'dashed', borderColor: '#A0AEC0', borderRadius: 2 }} />
-        <CCText type="labelCapsMed" color="mediumGray">40px</CCText>
+        <SpacerLabel>40px</SpacerLabel>
       </View>
       <Box label="Right" color="#93ECE5" />
     </CCRow>

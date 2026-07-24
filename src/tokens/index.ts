@@ -1,6 +1,6 @@
 export { typography, CCFontFamilies } from './typography';
 export { shadows } from './shadows';
-export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial } from './colorSchema';
+export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ThemeColor, RawColorSchema } from './colorSchema';
 export { ColorSchemaProvider, useColorSchema } from './ColorSchemaContext';
 export { CraftedProvider } from './CraftedProvider';
 export { schemaStore, initCraftedComponents } from './schemaStore';

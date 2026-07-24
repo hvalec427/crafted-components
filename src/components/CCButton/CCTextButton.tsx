@@ -9,6 +9,7 @@ import { typography } from '../../tokens/typography';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
 
 import { CCTextButtonConstants } from './CCTextButtonStyles';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 const buttonStyle = StyleSheet.create({
   opacity05: { opacity: 0.5 },
@@ -30,7 +31,7 @@ interface CCTextButtonProps {
   iconStyle?: StyleProp<ImageStyle>;
   textType?: keyof typeof typography;
   alignment?: 'start' | 'center' | 'end';
-  textColor?: string;
+  textColor?: ThemeColor;
   numberOfLines?: number;
   size?: CCTextButtonSizesEnum;
   addPadding?: boolean;

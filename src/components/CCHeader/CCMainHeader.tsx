@@ -12,6 +12,7 @@ import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { CCContainer } from '../CCLayout/CCContainer';
 import { useColorSchema } from '../../tokens/ColorSchemaContext';
 import { useAssets } from '../../tokens/AssetContext';
+import type { ThemeColor } from '../../tokens/colorSchema';
 
 interface CCHeaderAction {
   onPress: () => void;
@@ -94,8 +95,7 @@ interface CCMainHeaderProps {
   opacity?: number;
   numberOfLines?: number;
   paddingHorizontal?: number;
-  /** Background color — accepts a hex string or omit to use the schema surface color */
-  backgroundColor?: string;
+  backgroundColor?: ThemeColor;
   children?: React.ReactNode;
   overlay?: React.ReactNode;
   id?: string;
