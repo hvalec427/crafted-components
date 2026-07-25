@@ -35,7 +35,7 @@ export const CCScroller = (props: CCScrollerProps) => {
     fetchMore,
     paddingTop,
     paddingBottom,
-    bgColor,
+    bgColor = '#fff',
     scrollViewRef,
     extraHeight = 0,
   } = props;

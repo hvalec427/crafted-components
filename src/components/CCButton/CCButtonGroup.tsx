@@ -3,7 +3,7 @@ import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { CCContainer } from '../CCLayout/CCContainer';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const style = StyleSheet.create({
   outerWrapper: {
@@ -35,7 +35,7 @@ interface CCButtonGroupProps {
 }
 
 export const CCButtonGroup = (props: CCButtonGroupProps) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
 
   const {
     paddingTop = 10,

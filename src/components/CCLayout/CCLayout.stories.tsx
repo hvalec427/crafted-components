@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CCContainer } from './CCContainer';
 import { CCRow } from './CCRow';
 import { CCText } from '../CCText/CCText';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Layout/Layout',
@@ -22,7 +22,7 @@ const Box = ({ color = '#BAEBFF', label, height }: { color?: string; label?: str
 );
 
 const Label = ({ children }: { children: string }) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return <CCText type="labelCapsMed" color={schema.neutral.mediumGray} style={{ marginBottom: 4 }}>{children}</CCText>;
 };
 
@@ -115,7 +115,7 @@ export const RowJustify: StoryObj = {
 };
 
 const SpacerLabel = ({ children }: { children: string }) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return <CCText type="labelCapsMed" color={schema.neutral.mediumGray}>{children}</CCText>;
 };
 

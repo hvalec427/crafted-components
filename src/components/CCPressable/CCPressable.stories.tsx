@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 
 import { CCPressableOpacity } from './CCPressableOpacity';
 import { CCText } from '../CCText/CCText';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Components/Pressable',
@@ -27,7 +27,7 @@ export const Default: Story = {
 };
 
 const DisabledContent = () => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return (
     <View style={{ backgroundColor: '#E5E5E5', padding: 12, borderRadius: 8 }}>
       <CCText type="buttonMedium" color={schema.neutral.mediumGray}>Disabled</CCText>

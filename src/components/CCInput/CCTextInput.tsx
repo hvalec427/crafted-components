@@ -19,7 +19,7 @@ import {
 import { typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import {
   CCTextInputController,
   CCTextInputFormState,
@@ -275,7 +275,7 @@ const style = StyleSheet.create({
 
 export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
   (props, ref) => {
-    const schema = useColorSchema();
+    const schema = useTheme();
     const ic = schema.input;
     const neutral = schema.neutral;
 

@@ -3,7 +3,7 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { Edge, SafeAreaView } from 'react-native-safe-area-context';
 
 import { CCContainer } from '../CCLayout/CCContainer';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
 const style = StyleSheet.create({
@@ -29,7 +29,7 @@ interface CCScreenWrapperProps {
 }
 
 export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
 
   const {
     children,

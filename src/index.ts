@@ -12,6 +12,9 @@ export * from './components/CCPressable';
 // Buttons
 export * from './components/CCButton';
 
+// Pills
+export * from './components/CCPill';
+
 // Inputs
 export * from './components/CCInput';
 

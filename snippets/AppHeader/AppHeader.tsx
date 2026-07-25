@@ -6,7 +6,7 @@ import {
   CCIcon,
   CCText,
   CCPressableOpacity,
-  useColorSchema,
+  useTheme,
   useAssets,
 } from 'crafted-components';
 
@@ -40,7 +40,7 @@ export const AppHeader = ({
   actionIcon,
   onActionPress,
 }: AppHeaderProps) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   const { icons } = useAssets();
   const header = schema.header;
 

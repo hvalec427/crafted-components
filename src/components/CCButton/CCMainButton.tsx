@@ -5,7 +5,7 @@ import { ActivityIndicator } from 'react-native';
 import { CCText } from '../CCText/CCText';
 import { CCContainer } from '../CCLayout/CCContainer';
 import { CCRow } from '../CCLayout/CCRow';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 import {
   makeMainButtonColors,
@@ -120,7 +120,7 @@ export const CCMainButton = (props: CCMainButtonProps) => {
     progressWidth = '0%',
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
   const CCMainButtonStyle = useMemo(() => makeMainButtonStyle(schema), [schema]);
   const CCMainButtonColorsConstants = useMemo(() => makeMainButtonColors(schema), [schema]);
 

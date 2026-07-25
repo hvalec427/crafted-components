@@ -6,7 +6,7 @@ import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow, CCRowProps } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { typography } from '../../tokens/typography';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 import { CCTextButtonConstants } from './CCTextButtonStyles';
 import type { ThemeColor } from '../../tokens/colorSchema';
@@ -44,7 +44,7 @@ const textButtonStyle = StyleSheet.create({
 });
 
 export const CCTextButton = (props: CCTextButtonProps) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
 
   const {
     text,

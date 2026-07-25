@@ -16,4 +16,4 @@ export const ColorSchemaProvider = ({ schema, children }: ColorSchemaProviderPro
   </ColorSchemaContext.Provider>
 );
 
-export const useColorSchema = (): ColorSchema => useContext(ColorSchemaContext);
+export const useTheme = (): ColorSchema => useContext(ColorSchemaContext);

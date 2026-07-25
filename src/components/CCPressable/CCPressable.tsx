@@ -3,7 +3,7 @@ import { Animated, Easing, StyleProp, ViewStyle } from 'react-native';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 
 import { testProps } from '../../utils/CCTestingId';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
 export interface CCPressableProps {
@@ -24,7 +24,7 @@ export interface CCPressableProps {
 }
 
 const CCPressable = (props: CCPressableProps) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
 
   const {
     onPress = null,

@@ -4,7 +4,7 @@ import { ImageSourcePropType, StyleSheet, View, ViewStyle } from 'react-native';
 import { CCIcon } from '../CCIcon/CCIcon';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { testProps } from '../../utils/CCTestingId';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 import { RoundButtonSizes, makeRoundButtonStyle } from './CCRoundButtonStyle';
 
@@ -56,7 +56,7 @@ export const CCRoundButton = (props: CCRoundButtonProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
   const RoundButtonStyle = useMemo(() => makeRoundButtonStyle(schema), [schema]);
 
   return (

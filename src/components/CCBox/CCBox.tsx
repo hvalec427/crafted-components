@@ -12,9 +12,10 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 import { FlexAlignType, JustifyContentType } from '../../utils/CCLayoutEnums';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import { testProps } from '../../utils/CCTestingId';
 import type { ThemeColor } from '../../tokens/colorSchema';
+import { CCBoxConstants } from './CCBoxConstants';
 
 interface GradientBackground {
   gradient: string[];
@@ -31,7 +32,11 @@ export type CCBoxBackground = ThemeColor | GradientBackground | ImageBackground_
 
 export interface CCBoxProps {
   children?: React.ReactNode;
+  size?: 'small' | 'mid' | 'large';
   borderRadius?: number;
+  borderColor?: string;
+  borderWidth?: number;
+  borderStyle?: 'solid' | 'dashed' | 'dotted';
   align?: FlexAlignType;
   justify?: JustifyContentType;
   padding?: DimensionValue;
@@ -56,18 +61,20 @@ export interface CCBoxProps {
 
 const defaultStyle = StyleSheet.create({
   box: {
-    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 16,
-    overflow: 'hidden',
   },
 });
 
 export const CCBox = (props: CCBoxProps) => {
   const {
     children,
-    borderRadius = 30,
+    size,
+    borderRadius,
+    borderColor,
+    borderWidth,
+    borderStyle,
     align = 'center',
     justify = 'center',
     padding = 16,
@@ -90,11 +97,18 @@ export const CCBox = (props: CCBoxProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
+
+  const resolvedRadius = borderRadius ?? CCBoxConstants.borderRadius[size ?? 'large'];
+
+  const needsOverflowHidden = !borderStyle || borderStyle === 'solid';
 
   const boxStyle = [
     defaultStyle.box,
-    { borderRadius, alignItems: align, justifyContent: justify },
+    { borderRadius: resolvedRadius, alignItems: align, justifyContent: justify },
+    needsOverflowHidden && { overflow: 'hidden' as const },
+    ...(borderColor ? [{ borderColor, borderWidth: borderWidth ?? 1, borderStyle: borderStyle ?? 'solid' }] : []),
+    ...(borderStyle && !borderColor ? [{ borderStyle }] : []),
     ...(padding !== undefined ? [{ padding }] : []),
     ...(paddingTop ? [{ paddingTop }] : []),
     ...(paddingBottom ? [{ paddingBottom }] : []),

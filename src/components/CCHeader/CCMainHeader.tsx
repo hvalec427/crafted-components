@@ -10,7 +10,7 @@ import { CCIcon } from '../CCIcon/CCIcon';
 import { CCRow } from '../CCLayout/CCRow';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { CCContainer } from '../CCLayout/CCContainer';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import { useAssets } from '../../tokens/AssetContext';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
@@ -117,7 +117,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
   const { icons } = useAssets();
   const header = schema.header;
   const backgroundColor = props.backgroundColor ?? header.background;

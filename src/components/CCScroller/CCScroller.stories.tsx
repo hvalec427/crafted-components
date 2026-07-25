@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 
 import { CCScroller } from './CCScroller';
 import { CCText } from '../CCText/CCText';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Scroller/Scroller',
@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const ScrollContent = () => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return (
     <>
       {Array.from({ length: 20 }, (_, i) => (

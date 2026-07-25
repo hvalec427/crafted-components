@@ -3,7 +3,7 @@ import { StyleProp, Text, TextStyle } from 'react-native';
 
 import { typography } from '../../tokens/typography';
 import { testProps } from '../../utils/CCTestingId';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
 export type TextAlign =
@@ -46,7 +46,7 @@ export const CCText = (props: CCTextProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
 
   return (
     <Text

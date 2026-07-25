@@ -6,7 +6,7 @@ import { CCColumn } from '../CCLayout/CCColumn';
 import { CCRow } from '../CCLayout/CCRow';
 import { testProps } from '../../utils/CCTestingId';
 import CustomPressable from '../CCPressable/CCPressable';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const width = Dimensions.get('window').width;
 
@@ -60,7 +60,7 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
   const ci = schema.codeInput;
 
   const inputRef = React.useRef<Input>(null);

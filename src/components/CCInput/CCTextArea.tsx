@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput as Input, Platform, StyleSheet, View } from 'react-native';
 
 import { testProps } from '../../utils/CCTestingId';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const style = StyleSheet.create({
   wrapper: {
@@ -41,7 +41,7 @@ export const CCTextArea = (props: CCTextAreaProps) => {
     id,
   } = props;
 
-  const schema = useColorSchema();
+  const schema = useTheme();
   const ic = schema.input;
 
   const initialWrapperHeight = 21;

@@ -8,7 +8,7 @@ import { CCTextButton } from './CCTextButton';
 import { CCText } from '../CCText/CCText';
 import { icons } from '../../assets/icons';
 import { fn } from '@storybook/test';
-import { useColorSchema } from '../../tokens/ColorSchemaContext';
+import { useTheme } from '../../tokens/ColorSchemaContext';
 
 const meta = {
   title: 'Buttons/Button',
@@ -25,7 +25,7 @@ const SizeRow = ({
   label: string;
   children: React.ReactNode;
 }) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
       <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{label}</CCText>
@@ -107,7 +107,7 @@ export const Secondary: StoryObj = {
 // ─── Round ──────────────────────────────────────────────────────────────────
 
 const RoundLabel = ({ children }: { children: string }) => {
-  const schema = useColorSchema();
+  const schema = useTheme();
   return <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{children}</CCText>;
 };
 

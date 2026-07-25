@@ -3,9 +3,10 @@ import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ExtraColors
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
 import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
+import { CCBoxConstants } from '../components/CCBox/CCBoxConstants';
 import { initCraftedAssets } from './assetStore';
 import { useAssets as _useAssets } from './AssetContext';
-import { useColorSchema as _useColorSchema } from './ColorSchemaContext';
+import { useTheme as _useTheme } from './ColorSchemaContext';
 import defaultSchema from './schemas/default.json';
 import oceanSchema from './schemas/ocean.json';
 import sunsetSchema from './schemas/sunset.json';
@@ -87,7 +88,7 @@ export function initCraftedComponents<
   components?: Partial<ComponentSchema>;
 } = {}): {
   useAssets: () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages };
-  useColorSchema: () => ColorSchema & ExtraColors<TColors>;
+  useTheme: () => ColorSchema & ExtraColors<TColors>;
 } {
   if (colors) {
     const merged = deepMerge(defaultSchema as Record<string, unknown>, colors as Record<string, unknown>);
@@ -108,8 +109,12 @@ export function initCraftedComponents<
     }
   }
 
+  if (components?.CCBox?.borderRadius) {
+    Object.assign(CCBoxConstants.borderRadius, components.CCBox.borderRadius);
+  }
+
   return {
     useAssets: _useAssets as () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages },
-    useColorSchema: _useColorSchema as () => ColorSchema & ExtraColors<TColors>,
+    useTheme: _useTheme as () => ColorSchema & ExtraColors<TColors>,
   };
 }
