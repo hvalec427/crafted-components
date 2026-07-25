@@ -43,8 +43,8 @@ export interface CCMainButtonProps {
   type: keyof typeof CCMainButtonTypes;
   textColor?: ThemeColor;
   disabled?: boolean;
-  leadingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);
-  trailingComponent?: React.ReactNode | ((tintColor: string) => React.ReactNode);
+  leading?: React.ReactNode | ((tintColor: string) => React.ReactNode);
+  trailing?: React.ReactNode | ((tintColor: string) => React.ReactNode);
   size?: CCButtonSizesEnum;
   flex?: number | string;
   flexGrow?: number | string;
@@ -111,8 +111,8 @@ export const CCMainButton = (props: CCMainButtonProps) => {
     loadingText,
     loadingIndicator = false,
     hideTextWhileLoading = false,
-    leadingComponent,
-    trailingComponent,
+    leading,
+    trailing,
     flex = 0,
     flexGrow = 0,
     flexShrink = 0,
@@ -174,14 +174,14 @@ export const CCMainButton = (props: CCMainButtonProps) => {
           }
 
           const leadingItem =
-            typeof leadingComponent === 'function'
-              ? leadingComponent(tintColor)
-              : leadingComponent;
+            typeof leading === 'function'
+              ? leading(tintColor)
+              : leading;
 
           const trailingItem =
-            typeof trailingComponent === 'function'
-              ? trailingComponent(tintColor)
-              : trailingComponent;
+            typeof trailing === 'function'
+              ? trailing(tintColor)
+              : trailing;
 
           return (
             <>
