@@ -41,8 +41,8 @@ export const CCTextArea = (props: CCTextAreaProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
-  const ic = schema.input;
+  const theme = useTheme();
+  const colors = theme.input;
 
   const initialWrapperHeight = 21;
 
@@ -56,7 +56,7 @@ export const CCTextArea = (props: CCTextAreaProps) => {
     <View
       style={[
         style.wrapper,
-        { borderColor: ic.border, backgroundColor: ic.background },
+        { borderColor: colors.border, backgroundColor: colors.background },
         Platform.OS === 'ios' && inputInOneLine && style.iosWrapperPaddingTop,
       ]}>
       <Input

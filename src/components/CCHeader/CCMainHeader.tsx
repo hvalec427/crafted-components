@@ -117,10 +117,10 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
+  const theme = useTheme();
   const { icons } = useAssets();
-  const header = schema.header;
-  const backgroundColor = props.backgroundColor ?? header.background;
+  const colors = theme.header;
+  const backgroundColor = props.backgroundColor ?? colors.background;
 
   const safeAreaDimensions = useSafeAreaInsets();
 
@@ -139,7 +139,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
   const backArrow = (
     <CCIcon
       source={icons.arrow}
-      style={[style.backIcon, { tintColor: header.backIcon }]}
+      style={[style.backIcon, { tintColor: colors.backIcon }]}
     />
   );
 
@@ -151,7 +151,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
       style={[style.wrapper, { paddingTop: topPadding }]}>
       {onBackText && onBack && (
         <CCBackButton onBack={onBack}>
-          <CCText numberOfLines={1} type="body" color={header.title}>
+          <CCText numberOfLines={1} type="body" color={colors.title}>
             {onBackText}
           </CCText>
         </CCBackButton>
@@ -172,7 +172,7 @@ export const CCMainHeader = (props: CCMainHeaderProps) => {
         {!!label && (
           <CCText
             id={id ? `header-label-${id}` : 'header-label'}
-            color={header.title}
+            color={colors.title}
             numberOfLines={numberOfLines}
             flexShrink={1}
             textAlign="center"

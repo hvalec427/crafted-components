@@ -27,10 +27,10 @@ export const Default: Story = {
 };
 
 const DisabledContent = () => {
-  const schema = useTheme();
+  const theme = useTheme();
   return (
     <View style={{ backgroundColor: '#E5E5E5', padding: 12, borderRadius: 8 }}>
-      <CCText type="buttonMedium" color={schema.neutral.mediumGray}>Disabled</CCText>
+      <CCText type="buttonMedium" color={theme.neutral.mediumGray}>Disabled</CCText>
     </View>
   );
 };

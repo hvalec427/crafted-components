@@ -22,13 +22,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const ScrollContent = () => {
-  const schema = useTheme();
+  const theme = useTheme();
   return (
     <>
       {Array.from({ length: 20 }, (_, i) => (
         <View key={i} style={{ padding: 16, borderBottomWidth: 1, borderBottomColor: '#eee' }}>
           <CCText type="bodyReg">Scroll item {i + 1}</CCText>
-          <CCText type="subtextReg" color={schema.neutral.mediumGray}>
+          <CCText type="subtextReg" color={theme.neutral.mediumGray}>
             Supporting detail for item {i + 1}
           </CCText>
         </View>

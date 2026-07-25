@@ -275,9 +275,9 @@ const style = StyleSheet.create({
 
 export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
   (props, ref) => {
-    const schema = useTheme();
-    const ic = schema.input;
-    const neutral = schema.neutral;
+    const theme = useTheme();
+    const colors = theme.input;
+    const neutral = theme.neutral;
 
     const {
       controller,
@@ -522,11 +522,11 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           disabled={!editable}
           style={[
             style.inputWrapper,
-            { borderColor: ic.border, backgroundColor: ic.background },
+            { borderColor: colors.border, backgroundColor: colors.background },
             multiline ? style.inputWrapperTextArea : {},
-            error    ? { borderColor: ic.borderError,   borderWidth: 2 } : {},
-            warning  ? { borderColor: ic.borderWarning, borderWidth: 2 } : {},
-            isFocused ? { borderColor: ic.borderFocused, borderWidth: 2 } : {},
+            error    ? { borderColor: colors.borderError,   borderWidth: 2 } : {},
+            warning  ? { borderColor: colors.borderWarning, borderWidth: 2 } : {},
+            isFocused ? { borderColor: colors.borderFocused, borderWidth: 2 } : {},
           ]}>
           {leading && <View>{leading}</View>}
           <View
@@ -613,7 +613,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                 placeholder={placeholder}
                 placeholderTextColor={
                   (!isFocused && !placeholderLabel) || isFocused
-                    ? ic.placeholder
+                    ? colors.placeholder
                     : 'transparent'
                 }
                 defaultValue={defaultValue}
@@ -668,7 +668,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           {trailing && <View>{trailing}</View>}
         </CCPressableOpacity>
 
-        {error ? <Text style={[style.error, { color: ic.errorText }]}>{error}</Text> : null}
+        {error ? <Text style={[style.error, { color: colors.errorText }]}>{error}</Text> : null}
         {warning ? <Text style={[style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
 
         {weirdExtraSpaceBellowInputIfInstructionsAreShownAndErrorCanBeShown &&

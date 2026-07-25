@@ -56,8 +56,8 @@ export const CCRoundButton = (props: CCRoundButtonProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
-  const RoundButtonStyle = useMemo(() => makeRoundButtonStyle(schema), [schema]);
+  const theme = useTheme();
+  const RoundButtonStyle = useMemo(() => makeRoundButtonStyle(theme), [theme]);
 
   return (
     <View {...testProps(id)} pointerEvents="box-none">

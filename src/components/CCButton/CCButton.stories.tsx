@@ -25,10 +25,10 @@ const SizeRow = ({
   label: string;
   children: React.ReactNode;
 }) => {
-  const schema = useTheme();
+  const theme = useTheme();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-      <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{label}</CCText>
+      <CCText type="caption" color={theme.neutral.mediumGray} style={{ width: 48 }}>{label}</CCText>
       <View style={{ flex: 1, flexDirection: 'row', gap: 12 }}>{children}</View>
     </View>
   );
@@ -107,8 +107,8 @@ export const Secondary: StoryObj = {
 // ─── Round ──────────────────────────────────────────────────────────────────
 
 const RoundLabel = ({ children }: { children: string }) => {
-  const schema = useTheme();
-  return <CCText type="caption" color={schema.neutral.mediumGray} style={{ width: 48 }}>{children}</CCText>;
+  const theme = useTheme();
+  return <CCText type="caption" color={theme.neutral.mediumGray} style={{ width: 48 }}>{children}</CCText>;
 };
 
 export const Round: StoryObj = {

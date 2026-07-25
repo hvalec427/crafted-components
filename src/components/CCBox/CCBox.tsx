@@ -54,7 +54,7 @@ export interface CCBoxProps {
   marginHorizontal?: DimensionValue;
   marginVertical?: DimensionValue;
   flex?: number;
-  background?: CCBoxBackground;
+  background?: CCBoxBackground | CCBoxBackground[];
   style?: StyleProp<ViewStyle>;
   id?: string;
 }
@@ -97,7 +97,7 @@ export const CCBox = (props: CCBoxProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
+  const theme = useTheme();
 
   const resolvedRadius = borderRadius ?? CCBoxConstants.borderRadius[size ?? 'large'];
 
@@ -127,25 +127,60 @@ export const CCBox = (props: CCBoxProps) => {
     style,
   ] as StyleProp<ViewStyle>;
 
-  if (!background || typeof background === 'string') {
+  const layers = Array.isArray(background) ? background : [background];
+  const [first, ...overlays] = layers;
+
+  const renderOverlay = (bg: CCBoxBackground, index: number) => {
+    if (typeof bg === 'string') {
+      return <View key={index} style={[StyleSheet.absoluteFillObject, { backgroundColor: bg }]} />;
+    }
+    if ('gradient' in bg) {
+      return (
+        <LinearGradient
+          key={index}
+          colors={bg.gradient}
+          start={bg.start ?? { x: 0, y: 0 }}
+          end={bg.end ?? { x: 1, y: 1 }}
+          style={StyleSheet.absoluteFillObject}
+        />
+      );
+    }
+    return (
+      <ImageBackground
+        key={index}
+        source={bg.image}
+        resizeMode={bg.resizeMode ?? 'cover'}
+        style={StyleSheet.absoluteFillObject}
+      />
+    );
+  };
+
+  const inner = (
+    <>
+      {overlays.map(renderOverlay)}
+      {children}
+    </>
+  );
+
+  if (!first || typeof first === 'string') {
     return (
       <View
         {...testProps(id)}
-        style={[boxStyle, { backgroundColor: background ?? schema.surface }]}>
-        {children}
+        style={[boxStyle, { backgroundColor: first ?? theme.surface }]}>
+        {inner}
       </View>
     );
   }
 
-  if ('gradient' in background) {
+  if ('gradient' in first) {
     return (
       <LinearGradient
         {...testProps(id)}
-        colors={background.gradient}
-        start={background.start ?? { x: 0, y: 0 }}
-        end={background.end ?? { x: 1, y: 1 }}
+        colors={first.gradient}
+        start={first.start ?? { x: 0, y: 0 }}
+        end={first.end ?? { x: 1, y: 1 }}
         style={boxStyle}>
-        {children}
+        {inner}
       </LinearGradient>
     );
   }
@@ -153,10 +188,10 @@ export const CCBox = (props: CCBoxProps) => {
   return (
     <ImageBackground
       {...testProps(id)}
-      source={background.image}
-      resizeMode={background.resizeMode ?? 'cover'}
+      source={first.image}
+      resizeMode={first.resizeMode ?? 'cover'}
       style={boxStyle}>
-      {children}
+      {inner}
     </ImageBackground>
   );
 };

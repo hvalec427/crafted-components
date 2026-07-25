@@ -120,9 +120,9 @@ export const CCMainButton = (props: CCMainButtonProps) => {
     progressWidth = '0%',
   } = props;
 
-  const schema = useTheme();
-  const CCMainButtonStyle = useMemo(() => makeMainButtonStyle(schema), [schema]);
-  const CCMainButtonColorsConstants = useMemo(() => makeMainButtonColors(schema), [schema]);
+  const theme = useTheme();
+  const CCMainButtonStyle = useMemo(() => makeMainButtonStyle(theme), [theme]);
+  const CCMainButtonColorsConstants = useMemo(() => makeMainButtonColors(theme), [theme]);
 
   const hideText = loading && hideTextWhileLoading;
 
@@ -197,13 +197,13 @@ export const CCMainButton = (props: CCMainButtonProps) => {
                 paddingHorizontal={CCMainButtonConstants[size]?.paddingHorizontal}>
                 {loadingIndicator && hideTextWhileLoading && loading && (
                   <CCContainer style={layoutStyle.onlyLoadingIndicatorWrapper}>
-                    <ActivityIndicator size="small" color={schema.button.loadingIndicator} />
+                    <ActivityIndicator size="small" color={theme.button.loadingIndicator} />
                   </CCContainer>
                 )}
                 <CCRow gap={5} align={'center'} justify={'center'}>
                   {loadingIndicator && !hideTextWhileLoading && loading && (
                     <CCContainer style={layoutStyle.loadingIndicatorAndTextWrapper}>
-                      <ActivityIndicator size="small" color={schema.button.loadingIndicator} />
+                      <ActivityIndicator size="small" color={theme.button.loadingIndicator} />
                     </CCContainer>
                   )}
 
@@ -232,7 +232,7 @@ export const CCMainButton = (props: CCMainButtonProps) => {
                         layoutStyle.loadingIndicatorAndTextWrapper,
                         layoutStyle.loadingIndicatorAndTextWrapperHidden,
                       ]}>
-                      <ActivityIndicator size="small" color={schema.button.loadingIndicator} />
+                      <ActivityIndicator size="small" color={theme.button.loadingIndicator} />
                     </CCContainer>
                   )}
                 </CCRow>

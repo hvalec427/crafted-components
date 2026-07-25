@@ -28,7 +28,7 @@ const sizes: Record<CCPillSize, { height: number; paddingHorizontal: number; bor
 };
 
 export const CCPill = ({ label, active = false, onPress, size = 'large', disabled = false, id }: CCPillProps) => {
-  const schema = useTheme();
+  const theme = useTheme();
   const s = sizes[size];
   const textStyle = size === 'small' ? typography.label : typography.labelLarge;
 
@@ -44,8 +44,8 @@ export const CCPill = ({ label, active = false, onPress, size = 'large', disable
           paddingHorizontal: s.paddingHorizontal,
           borderRadius: s.borderRadius,
           backgroundColor: active
-            ? schema.primary
-            : schema.surface,
+            ? theme.primary
+            : theme.surface,
           opacity: disabled ? 0.4 : pressed ? 0.75 : 1,
         },
       ]}>
@@ -54,7 +54,7 @@ export const CCPill = ({ label, active = false, onPress, size = 'large', disable
         numberOfLines={1}
         style={[
           textStyle,
-          { color: active ? schema.textColor.inverse : schema.textColor.secondary },
+          { color: active ? theme.textColor.inverse : theme.textColor.secondary },
         ]}>
         {label}
       </Text>

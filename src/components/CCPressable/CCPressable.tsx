@@ -24,7 +24,7 @@ export interface CCPressableProps {
 }
 
 const CCPressable = (props: CCPressableProps) => {
-  const schema = useTheme();
+  const theme = useTheme();
 
   const {
     onPress = null,
@@ -34,7 +34,7 @@ const CCPressable = (props: CCPressableProps) => {
     id,
     type = undefined,
     pointerEvents,
-    overlayPrimaryInitialColor = schema.surface,
+    overlayPrimaryInitialColor = theme.surface,
   } = props;
 
   let { hitSlop } = props;
@@ -106,7 +106,7 @@ const CCPressable = (props: CCPressableProps) => {
           type === 'scale' && { transform: [{ scale }] },
           type === 'background_overlay_primary' && {
             backgroundColor: isPressed
-              ? schema.button.primaryLightBg
+              ? theme.button.primaryLightBg
               : overlayPrimaryInitialColor,
           },
         ]}>

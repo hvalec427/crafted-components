@@ -27,7 +27,7 @@ interface CCButtonGroupProps {
   children: React.ReactNode;
   extraComponent?: React.ReactNode;
   vertical?: boolean;
-  /** Background color — accepts a hex string or omit to use the schema surface color */
+  /** Background color — accepts a hex string or omit to use the theme surface color */
   bgColor?: string;
   customStyle?: StyleProp<ViewStyle>;
   noBottomPadding?: boolean;
@@ -35,7 +35,8 @@ interface CCButtonGroupProps {
 }
 
 export const CCButtonGroup = (props: CCButtonGroupProps) => {
-  const schema = useTheme();
+  const theme = useTheme();
+  const colors = theme.buttonGroup;
 
   const {
     paddingTop = 10,
@@ -46,7 +47,7 @@ export const CCButtonGroup = (props: CCButtonGroupProps) => {
     noBottomPadding = false,
   } = props;
 
-  const bgColor = props.bgColor ?? schema.buttonGroup.background;
+  const bgColor = props.bgColor ?? colors.background;
 
   const safeAreaDimensions = useSafeAreaInsets();
 

@@ -22,8 +22,8 @@ const Box = ({ color = '#BAEBFF', label, height }: { color?: string; label?: str
 );
 
 const Label = ({ children }: { children: string }) => {
-  const schema = useTheme();
-  return <CCText type="labelCapsMed" color={schema.neutral.mediumGray} style={{ marginBottom: 4 }}>{children}</CCText>;
+  const theme = useTheme();
+  return <CCText type="labelCapsMed" color={theme.neutral.mediumGray} style={{ marginBottom: 4 }}>{children}</CCText>;
 };
 
 export const Container: StoryObj = {
@@ -115,8 +115,8 @@ export const RowJustify: StoryObj = {
 };
 
 const SpacerLabel = ({ children }: { children: string }) => {
-  const schema = useTheme();
-  return <CCText type="labelCapsMed" color={schema.neutral.mediumGray}>{children}</CCText>;
+  const theme = useTheme();
+  return <CCText type="labelCapsMed" color={theme.neutral.mediumGray}>{children}</CCText>;
 };
 
 export const SpacerVertical: StoryObj = {

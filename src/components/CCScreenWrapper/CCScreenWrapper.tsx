@@ -29,7 +29,7 @@ interface CCScreenWrapperProps {
 }
 
 export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
-  const schema = useTheme();
+  const appTheme = useTheme();
 
   const {
     children,
@@ -40,7 +40,7 @@ export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
     bottomBarComponent,
   } = props;
 
-  const bgColor = props.bgColor ?? schema.screenWrapper.background;
+  const bgColor = props.bgColor ?? appTheme.screenWrapper.background;
   const bgColorBottomSafeArea = props.bgColorBottomSafeArea ?? bgColor;
   const noBottomSafeArea = props.noBottomSafeArea ?? (!!bottomBarComponent || false);
 

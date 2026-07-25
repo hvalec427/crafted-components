@@ -60,8 +60,8 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
-  const ci = schema.codeInput;
+  const theme = useTheme();
+  const colors = theme.codeInput;
 
   const inputRef = React.useRef<Input>(null);
 
@@ -89,9 +89,9 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
   };
 
   const messageColor =
-    status === 'success' ? ci.successText :
-    status === 'error'   ? ci.errorText   :
-    status === 'loading' ? ci.loadingText :
+    status === 'success' ? colors.successText :
+    status === 'error'   ? colors.errorText   :
+    status === 'loading' ? colors.loadingText :
     'transparent';
 
   return (
@@ -115,17 +115,17 @@ export const CCCodeInput = (props: CCCodeInputProps) => {
         <CCRow gap={8}>
           {[...Array(numberOfChar)].map((_, index) => {
             const borderColor =
-              status === 'success' ? ci.borderSuccess :
-              status === 'error'   ? ci.borderError   :
-              status === 'loading' ? ci.border         :
-              currentIndex === index ? ci.borderFocused : ci.border;
+              status === 'success' ? colors.borderSuccess :
+              status === 'error'   ? colors.borderError   :
+              status === 'loading' ? colors.border         :
+              currentIndex === index ? colors.borderFocused : colors.border;
 
             return (
               <View
                 key={index}
                 style={[
                   style.codeInput,
-                  { borderColor, backgroundColor: ci.background },
+                  { borderColor, backgroundColor: colors.background },
                 ]}>
                 <CCText type="h3Bold">{currentValue[index]}</CCText>
               </View>

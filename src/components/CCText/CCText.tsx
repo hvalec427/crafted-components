@@ -46,7 +46,7 @@ export const CCText = (props: CCTextProps) => {
     id,
   } = props;
 
-  const schema = useTheme();
+  const theme = useTheme();
 
   return (
     <Text
@@ -55,7 +55,7 @@ export const CCText = (props: CCTextProps) => {
       onPress={onPress ? onPress : undefined}
       {...(numberOfLines && { numberOfLines })}
       style={[
-        { color: schema.textColor.primary },
+        { color: theme.textColor.primary },
         type && { ...typography[type] },
         color && { color },
         textAlign && { textAlign },
