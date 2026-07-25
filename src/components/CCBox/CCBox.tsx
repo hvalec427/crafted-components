@@ -132,7 +132,7 @@ export const CCBox = (props: CCBoxProps) => {
 
   const renderOverlay = (bg: CCBoxBackground, index: number) => {
     if (typeof bg === 'string') {
-      return <View key={index} style={[StyleSheet.absoluteFillObject, { backgroundColor: bg }]} />;
+      return <View key={index} style={[StyleSheet.absoluteFill, { backgroundColor: bg }]} />;
     }
     if ('gradient' in bg) {
       return (
@@ -141,7 +141,7 @@ export const CCBox = (props: CCBoxProps) => {
           colors={bg.gradient}
           start={bg.start ?? { x: 0, y: 0 }}
           end={bg.end ?? { x: 1, y: 1 }}
-          style={StyleSheet.absoluteFillObject}
+          style={StyleSheet.absoluteFill}
         />
       );
     }
@@ -150,14 +150,14 @@ export const CCBox = (props: CCBoxProps) => {
         key={index}
         source={bg.image}
         resizeMode={bg.resizeMode ?? 'cover'}
-        style={StyleSheet.absoluteFillObject}
+        style={StyleSheet.absoluteFill}
       />
     );
   };
 
   const inner = (
     <>
-      {overlays.map(renderOverlay)}
+      {(overlays.filter(Boolean) as CCBoxBackground[]).map(renderOverlay)}
       {children}
     </>
   );
