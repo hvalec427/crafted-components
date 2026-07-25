@@ -6,6 +6,14 @@
   "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
+  "exports": {
+    ".": {
+      "react-native": "./src/index",
+      "types": "./lib/typescript/index.d.ts",
+      "require": "./lib/commonjs/index",
+      "default": "./lib/commonjs/index"
+    }
+  },
   "files": [
     "src",
     "lib",

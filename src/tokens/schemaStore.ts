@@ -1,5 +1,5 @@
 import type { CCImageSource } from '../utils/CCImageSource';
-import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, RawColorSchema } from './colorSchema';
+import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
 import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
@@ -78,15 +78,16 @@ export const schemaStore = {
 
 export function initCraftedComponents<
   TIcons extends Record<string, CCImageSource> = Record<never, never>,
-  TImages extends Record<string, CCImageSource> = Record<never, never>
+  TImages extends Record<string, CCImageSource> = Record<never, never>,
+  TColors extends DeepPartial<RawColorSchema> = Record<never, never>
 >({ colors, icons, images, components }: {
-  colors?: DeepPartial<RawColorSchema>;
+  colors?: TColors;
   icons?: TIcons;
   images?: TImages;
   components?: Partial<ComponentSchema>;
 } = {}): {
   useAssets: () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages };
-  useColorSchema: () => ColorSchema;
+  useColorSchema: () => ColorSchema & ExtraColors<TColors>;
 } {
   if (colors) {
     const merged = deepMerge(defaultSchema as Record<string, unknown>, colors as Record<string, unknown>);
@@ -109,6 +110,6 @@ export function initCraftedComponents<
 
   return {
     useAssets: _useAssets as () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages },
-    useColorSchema: _useColorSchema,
+    useColorSchema: _useColorSchema as () => ColorSchema & ExtraColors<TColors>,
   };
 }

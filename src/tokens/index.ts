@@ -1,10 +1,10 @@
 export { typography } from './typography';
 export { shadows } from './shadows';
-export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ThemeColor, RawColorSchema } from './colorSchema';
-export { ColorSchemaProvider, useColorSchema } from './ColorSchemaContext';
+export type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, ThemeColor, RawColorSchema } from './colorSchema';
+export { ColorSchemaProvider } from './ColorSchemaContext';
 export { CraftedProvider } from './CraftedProvider';
 export { schemaStore, initCraftedComponents } from './schemaStore';
 export type { AssetSchema, BuiltInIcons, BuiltInImages } from './assetSchema';
 export type { ComponentSchema } from './componentSchema';
-export { AssetProvider, useAssets } from './AssetContext';
+export { AssetProvider } from './AssetContext';
 export { assetStore, initCraftedAssets } from './assetStore';

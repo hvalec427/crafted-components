@@ -183,3 +183,11 @@ export interface ColorSchema extends BaseColors {
 }
 
 export type ColorSchemaName = 'default' | 'ocean' | 'sunset';
+
+type BrandColors<T> = T extends string
+  ? ThemeColor
+  : T extends object
+  ? { [K in keyof T]: BrandColors<T[K]> }
+  : T;
+
+export type ExtraColors<T> = BrandColors<{ [K in keyof T as K extends keyof ColorSchema ? never : K]: T[K] }>;
