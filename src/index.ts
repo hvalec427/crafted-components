@@ -20,6 +20,7 @@ export * from './components/CCInput';
 
 // Feedback
 export * from './components/CCAlertBanner';
+export * from './components/CCPopup';
 
 // Navigation & Screen
 export * from './components/CCHeader';

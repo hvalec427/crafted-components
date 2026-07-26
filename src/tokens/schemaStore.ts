@@ -2,6 +2,8 @@ import type { CCImageSource } from '../utils/CCImageSource';
 import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
+import type { PopupRegistration, TypedShowPopup } from '../components/CCPopup/popupService';
+import { popupStore, showPopup as _showPopup, hidePopup as _hidePopup } from '../components/CCPopup/popupService';
 import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
 import { CCBoxConstants } from '../components/CCBox/CCBoxConstants';
 import { initCraftedAssets } from './assetStore';
@@ -80,15 +82,19 @@ export const schemaStore = {
 export function initCraftedComponents<
   TIcons extends Record<string, CCImageSource> = Record<never, never>,
   TImages extends Record<string, CCImageSource> = Record<never, never>,
-  TColors extends DeepPartial<RawColorSchema> = Record<never, never>
->({ colors, icons, images, components }: {
+  TColors extends DeepPartial<RawColorSchema> = Record<never, never>,
+  TPopups extends PopupRegistration = Record<never, never>
+>({ colors, icons, images, components, popups }: {
   colors?: TColors;
   icons?: TIcons;
   images?: TImages;
   components?: Partial<ComponentSchema>;
+  popups?: TPopups;
 } = {}): {
   useAssets: () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages };
   useTheme: () => ColorSchema & ExtraColors<TColors>;
+  showPopup: TypedShowPopup<TPopups>;
+  hidePopup: () => void;
 } {
   if (colors) {
     const merged = deepMerge(defaultSchema as Record<string, unknown>, colors as Record<string, unknown>);
@@ -113,8 +119,14 @@ export function initCraftedComponents<
     Object.assign(CCBoxConstants.borderRadius, components.CCBox.borderRadius);
   }
 
+  if (popups) {
+    popupStore.register(popups);
+  }
+
   return {
     useAssets: _useAssets as () => { icons: BuiltInIcons & TIcons; images: BuiltInImages & TImages },
     useTheme: _useTheme as () => ColorSchema & ExtraColors<TColors>,
+    showPopup: _showPopup as unknown as TypedShowPopup<TPopups>,
+    hidePopup: _hidePopup,
   };
 }
