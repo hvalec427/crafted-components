@@ -18,6 +18,9 @@ export * from './components/CCPill';
 // Inputs
 export * from './components/CCInput';
 
+// Feedback
+export * from './components/CCAlertBanner';
+
 // Navigation & Screen
 export * from './components/CCHeader';
 export * from './components/CCScreenWrapper';
