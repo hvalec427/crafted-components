@@ -145,7 +145,6 @@ export interface CCTextInputProps {
   showErrorOn?: 'change' | 'blur' | 'focus' | 'manual_validate' | undefined;
   clearErrorOn?: 'change' | 'blur' | 'focus' | undefined;
   error?: string;
-  weirdExtraSpaceBellowInputIfInstructionsAreShownAndErrorCanBeShown?: boolean;
   id?: string;
 }
 
@@ -268,8 +267,8 @@ const style = StyleSheet.create({
   placeholderLabel: {
     ...typography.caption,
   },
-  spacer: {
-    height: 16,
+  errorWarningContainer: {
+    minHeight: 16,
   },
 });
 
@@ -310,7 +309,6 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
       maxLength,
       blurOnSubmit = true,
       error: customError,
-      weirdExtraSpaceBellowInputIfInstructionsAreShownAndErrorCanBeShown,
       id,
     } = props;
 
@@ -668,14 +666,10 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
           {trailing && <View>{trailing}</View>}
         </CCPressableOpacity>
 
-        {error ? <Text style={[style.error, { color: colors.errorText }]}>{error}</Text> : null}
-        {warning ? <Text style={[style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
-
-        {weirdExtraSpaceBellowInputIfInstructionsAreShownAndErrorCanBeShown &&
-        !error &&
-        !warning ? (
-          <View style={style.spacer} />
-        ) : null}
+        <View style={style.errorWarningContainer}>
+          {error ? <Text style={[style.error, { color: colors.errorText }]}>{error}</Text> : null}
+          {warning ? <Text style={[style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
+        </View>
 
         {instructions && instructionsPosition === 'bottom' ? (
           <Text style={[style.instructions, { color: neutral.darkGray }]}>{instructions}</Text>
