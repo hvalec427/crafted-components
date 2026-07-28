@@ -1,5 +1,5 @@
 import type { CCImageSource } from '../utils/CCImageSource';
-import type { BaseColors, ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
+import type { ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
 import type { PopupRegistration, TypedShowPopup } from '../components/CCPopup/popupService';
@@ -55,8 +55,8 @@ function deepMerge(base: Record<string, unknown>, overrides: Record<string, unkn
 
 const schemas: Record<ColorSchemaName, ColorSchema> = {
   default: resolveTokens(defaultSchema as Record<string, unknown>),
-  ocean:   resolveTokens(oceanSchema as Record<string, unknown>),
-  sunset:  resolveTokens(sunsetSchema as Record<string, unknown>),
+  ocean: resolveTokens(oceanSchema as Record<string, unknown>),
+  sunset: resolveTokens(sunsetSchema as Record<string, unknown>),
 };
 
 let _current: ColorSchema = schemas.default;

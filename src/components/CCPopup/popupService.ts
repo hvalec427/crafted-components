@@ -1,6 +1,5 @@
 import type React from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PopupRenderFn<P = void> = (payload: P) => React.ReactNode;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
