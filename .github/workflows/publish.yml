@@ -35,20 +35,20 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Bump version
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.version_bump != 'none' }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm version ${{ inputs.version_bump }} -m "chore: bump version to %s [skip ci]"
+          yarn version --${{ inputs.version_bump }} --message "chore: bump version to %s [skip ci]"
           git push
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Publish
-        run: npm publish --access public
+        run: yarn publish --access public --non-interactive
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
