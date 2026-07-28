@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "bob build",
-    "prepare": "bob build && yarn link",
+    "prepare": "bob build",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "snippet": "node snippets/copy.mjs"
