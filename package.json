@@ -20,7 +20,8 @@
   },
   "scripts": {
     "build": "bob build",
-    "prepare": "bob build",
+    "prepare": "husky",
+    "test": "jest",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "snippet": "node snippets/copy.mjs"
@@ -43,17 +44,26 @@
     "react-native-linear-gradient": "^2.8.3"
   },
   "devDependencies": {
+    "@react-native/babel-preset": "^0.86.2",
+    "@react-native/jest-preset": "^0.86.2",
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
     "@types/react": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
+    "babel-jest": "^30.4.1",
     "eslint": "^10.5.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
     "react": "19.2.3",
     "react-native": "0.86.0",
     "react-native-builder-bob": "^0.30.3",
     "react-native-gesture-handler": "^3.0.2",
     "react-native-safe-area-context": "^5.8.0",
+    "react-test-renderer": "^19.2.3",
+    "test-renderer": "^1.2.0",
     "typescript": "^5.4.0"
   },
   "react-native-builder-bob": {
