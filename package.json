@@ -26,6 +26,7 @@
     "lint:fix": "eslint src --fix",
     "snippet": "node snippets/copy.mjs"
   },
+  "license": "MIT",
   "keywords": [
     "react-native",
     "ui",
