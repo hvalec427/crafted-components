@@ -2,25 +2,13 @@
 
 A React Native UI component library with built-in theming support.
 
-## Local installation
-
-In your consuming app, run:
+## Installation
 
 ```bash
-yarn add file:../crafted-components --ignore-scripts
+yarn add crafted-components
 ```
 
-Or with yarn link:
-
-```bash
-# Inside crafted-components
-yarn link
-
-# Inside your app
-yarn link crafted-components
-```
-
-### Required peer dependencies
+### Peer dependencies
 
 Install these in your app if not already present:
 
@@ -88,15 +76,6 @@ function MyComponent() {
 }
 ```
 
-### Using `CCIcon` and `CCImage` with an inline source
-
-Both components also accept a `CCImageSource` directly, bypassing the asset store:
-
-```tsx
-<CCIcon source={require('./assets/icons/star.png')} width={20} height={20} />
-<CCImage source="https://cdn.example.com/photo.jpg" width="100%" aspectRatio={16 / 9} />
-```
-
 ## Switching themes
 
 Three built-in themes are available: `default`, `ocean`, `sunset`.
@@ -126,10 +105,6 @@ export default function HomeScreen() {
 }
 ```
 
-## Storybook
-
-The package ships its stories so you can run them inside your own app's Storybook to preview every component with your custom theme applied.
-
 ## Accessing theme tokens
 
 Use the `useColorSchema` hook inside any component wrapped by `CraftedProvider`:
@@ -143,3 +118,4 @@ function MyComponent() {
   return <View style={{ backgroundColor: schema.background }} />;
 }
 ```
+
