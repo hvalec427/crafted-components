@@ -17,6 +17,10 @@ on:
           - minor
           - major
 
+concurrency:
+  group: publish
+  cancel-in-progress: true
+
 jobs:
   publish:
     name: Build & Publish
@@ -44,6 +48,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           yarn version --${{ (github.event_name == 'workflow_dispatch' && inputs.version_bump != 'none') && inputs.version_bump || 'minor' }} --message "chore: bump version to %s [skip ci]"
+          git pull --rebase
           git push
 
       - name: Build
