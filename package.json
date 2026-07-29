@@ -1,12 +1,9 @@
 {
-  "name": "@hvalec427/crafted-components",
+  "name": "crafted-components",
   "version": "1.6.0",
   "description": "Crafted UI component library for React Native",
   "repository": {
     "url": "https://github.com/hvalec427/crafted-components.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   },
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
@@ -26,7 +23,7 @@
   },
   "scripts": {
     "build": "bob build",
-    "prepare": "husky",
+    "prepare": "bob build && (husky || true)",
     "test": "jest",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
