@@ -65,18 +65,11 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Publish to GitHub Packages
-        run: yarn publish --access public --non-interactive
+      - name: Publish & Release
+        run: |
+          yarn publish --access public --non-interactive
+          VERSION=$(node -p "require('./package.json').version")
+          gh release create "v$VERSION" --generate-notes --title "v$VERSION"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get version
-        id: pkg
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.pkg.outputs.version }}
-          name: v${{ steps.pkg.outputs.version }}
-          generate_release_notes: true
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
