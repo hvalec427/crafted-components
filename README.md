@@ -12,10 +12,10 @@ Add the following to your project's `.npmrc`:
 always-auth=true
 ```
 
-Then install:
+Then install using an alias so imports stay as `crafted-components`:
 
 ```bash
-yarn add @hvalec427/crafted-components
+yarn add crafted-components@npm:@hvalec427/crafted-components
 ```
 
 ### Peer dependencies
