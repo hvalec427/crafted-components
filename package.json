@@ -1,7 +1,13 @@
 {
-  "name": "crafted-components",
+  "name": "@hvalec427/crafted-components",
   "version": "1.2.0",
   "description": "Crafted UI component library for React Native",
+  "repository": {
+    "url": "https://github.com/hvalec427/crafted-components.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "lib/commonjs/index",
   "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",

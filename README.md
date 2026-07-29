@@ -4,8 +4,18 @@ A React Native UI component library with built-in theming support.
 
 ## Installation
 
+Add the following to your project's `.npmrc`:
+
+```
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+@hvalec427:registry=https://npm.pkg.github.com
+always-auth=true
+```
+
+Then install:
+
 ```bash
-yarn add crafted-components
+yarn add @hvalec427/crafted-components
 ```
 
 ### Peer dependencies
