@@ -44,14 +44,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Bump version
+      - name: Bump version (working tree only)
+        id: bump
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          yarn version --${{ (github.event_name == 'workflow_dispatch' && inputs.version_bump != 'none') && inputs.version_bump || 'minor' }} --message "chore: bump version to %s [skip ci]"
-          git pull --rebase
-          git push
-          git push --tags
+          yarn version --${{ (github.event_name == 'workflow_dispatch' && inputs.version_bump != 'none') && inputs.version_bump || 'minor' }} --no-git-tag-version
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
       - name: Test
         run: yarn test
@@ -62,9 +59,19 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Commit and tag version bump
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.version }} [skip ci]"
+          git tag "v${{ steps.bump.outputs.version }}"
+          git pull --rebase
+          git push
+          git push --tags
+
       - name: Create GitHub Release
         run: |
-          VERSION=$(node -p "require('./package.json').version")
-          gh release create "v$VERSION" --generate-notes --title "v$VERSION"
+          gh release create "v${{ steps.bump.outputs.version }}" --generate-notes --title "v${{ steps.bump.outputs.version }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
