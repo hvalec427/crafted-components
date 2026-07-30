@@ -6,6 +6,17 @@ import { CCContainer } from '../CCLayout/CCContainer';
 import { useTheme } from '../../tokens/ColorSchemaContext';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
+const isColorDark = (color: string): boolean => {
+  const hex = color.replace('#', '');
+  const full = hex.length === 3
+    ? hex.split('').map(c => c + c).join('')
+    : hex;
+  const r = parseInt(full.substring(0, 2), 16);
+  const g = parseInt(full.substring(2, 4), 16);
+  const b = parseInt(full.substring(4, 6), 16);
+  return 0.299 * r + 0.587 * g + 0.114 * b < 128;
+};
+
 const style = StyleSheet.create({
   safeArea: {
     zIndex: 10,
@@ -31,16 +42,16 @@ interface CCScreenWrapperProps {
 export const CCScreenWrapper = (props: CCScreenWrapperProps) => {
   const appTheme = useTheme();
 
+  const bgColor = props.bgColor ?? appTheme.screenWrapper.background;
+
   const {
     children,
     header,
-    theme = 'light',
+    theme = isColorDark(bgColor) ? 'dark' : 'light',
     disableTouch = false,
     noTopSafeArea = false,
     bottomBarComponent,
   } = props;
-
-  const bgColor = props.bgColor ?? appTheme.screenWrapper.background;
   const bgColorBottomSafeArea = props.bgColorBottomSafeArea ?? bgColor;
   const noBottomSafeArea = props.noBottomSafeArea ?? (!!bottomBarComponent || false);
 
