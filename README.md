@@ -5,7 +5,11 @@ A React Native UI component library with built-in theming support.
 ## Installation
 
 ```bash
+# yarn
 yarn add crafted-components@github:hvalec427/crafted-components
+
+# npm
+npm install crafted-components@github:hvalec427/crafted-components
 ```
 
 ### Peer dependencies
@@ -13,7 +17,11 @@ yarn add crafted-components@github:hvalec427/crafted-components
 Install these in your app if not already present:
 
 ```bash
+# yarn
 yarn add react-native-safe-area-context react-native-gesture-handler react-native-keyboard-aware-scroll-view
+
+# npm
+npm install react-native-safe-area-context react-native-gesture-handler react-native-keyboard-aware-scroll-view
 ```
 
 ## Setup
