@@ -603,11 +603,13 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                 textAlign={textAlign}
                 style={[
                   style.inputField,
+                  { color: editable ? colors.text : colors.textDisabled },
                   !multiline && style.inputFieldSingleLine,
                   textType === 'bold' && style.inputFieldBold,
                   multiline && style.inputFieldMultiline,
                   multiline && isAndroid && style.inputFieldMultilineAndroid,
                 ]}
+                cursorColor={colors.cursorColor}
                 placeholder={placeholder}
                 placeholderTextColor={
                   (!isFocused && !placeholderLabel) || isFocused
