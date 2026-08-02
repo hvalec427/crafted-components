@@ -27,6 +27,7 @@ export enum CCRoundButtonTypes {
   errorOutlined = 'errorOutlined',
   outlinedDark = 'outlinedDark',
   primaryLight = 'primaryLight',
+  neutral = 'neutral',
 }
 
 export enum CCRoundButtonSizesEnum {

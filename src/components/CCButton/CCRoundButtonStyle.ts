@@ -30,5 +30,9 @@ export const makeRoundButtonStyle = (theme: ColorSchema): Record<string, object>
     outlinedDarkWrapper:         { backgroundColor: colors.outlinedDarkBg,        borderColor: colors.outlinedDarkBorder,         borderWidth: 1 },
     outlinedDarkWrapperDisabled: { backgroundColor: colors.outlinedDarkDisabledBg, borderColor: colors.outlinedDarkDisabledBorder, borderWidth: 1 },
     outlinedDarkTint:            { tintColor: colors.outlinedDarkIcon },
+
+    neutralWrapper:         { backgroundColor: colors.neutralBg,         borderColor: colors.neutralBorder,         borderWidth: 1 },
+    neutralWrapperDisabled: { backgroundColor: colors.neutralDisabledBg, borderColor: colors.neutralDisabledBorder, borderWidth: 1 },
+    neutralTint:            { tintColor: colors.neutralIcon },
   };
 };

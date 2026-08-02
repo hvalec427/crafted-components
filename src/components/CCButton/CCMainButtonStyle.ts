@@ -51,6 +51,11 @@ export const makeMainButtonColors = (theme: ColorSchema) => {
       pressedTextColor:  colors.whiteText,
       disabledTextColor: colors.whiteText,
     },
+    secondary: {
+      mainTextColor:     colors.secondaryText,
+      pressedTextColor:  colors.secondaryText,
+      disabledTextColor: colors.secondaryTextDisabled,
+    },
   };
 };
 
@@ -120,5 +125,13 @@ export const makeMainButtonStyle = (theme: ColorSchema): Record<string, object> 
     whiteText:            { color: colors.whiteText },
     whitePressedText:     { color: colors.whiteText },
     whiteDisabledText:    { color: colors.whiteText },
+
+    secondaryWrapper:         { backgroundColor: colors.secondaryBg,         borderColor: colors.secondaryBorder,         borderWidth: 1 },
+    secondaryPressedWrapper:  { backgroundColor: colors.secondaryPressedBg,  borderColor: colors.secondaryPressedBorder },
+    secondaryDisabledWrapper: { backgroundColor: colors.secondaryDisabledBg, borderColor: colors.secondaryDisabledBg },
+    secondaryWrapperProgress: { backgroundColor: colors.secondaryPressedBg },
+    secondaryText:            { color: colors.secondaryText },
+    secondaryPressedText:     { color: colors.secondaryText },
+    secondaryDisabledText:    { color: colors.secondaryTextDisabled },
   };
 };

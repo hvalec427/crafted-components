@@ -78,26 +78,26 @@ export const Secondary: StoryObj = {
     <Col>
       <SizeRow label="Large">
         <View style={{ flex: 1 }}>
-          <CCMainButton text="Secondary" type="outline" size={CCButtonSizesEnum.large} onPress={fn()} />
+          <CCMainButton text="Secondary" type="secondary" size={CCButtonSizesEnum.large} onPress={fn()} />
         </View>
         <View style={{ flex: 1, opacity: 0.5 }}>
-          <CCMainButton text="Disabled" type="outline" size={CCButtonSizesEnum.large} disabled onPress={fn()} />
+          <CCMainButton text="Disabled" type="secondary" size={CCButtonSizesEnum.large} disabled onPress={fn()} />
         </View>
       </SizeRow>
       <SizeRow label="Medium">
         <View style={{ flex: 1 }}>
-          <CCMainButton text="Secondary" type="outline" size={CCButtonSizesEnum.medium} onPress={fn()} />
+          <CCMainButton text="Secondary" type="secondary" size={CCButtonSizesEnum.medium} onPress={fn()} />
         </View>
         <View style={{ flex: 1, opacity: 0.5 }}>
-          <CCMainButton text="Disabled" type="outline" size={CCButtonSizesEnum.medium} disabled onPress={fn()} />
+          <CCMainButton text="Disabled" type="secondary" size={CCButtonSizesEnum.medium} disabled onPress={fn()} />
         </View>
       </SizeRow>
       <SizeRow label="Small">
         <View style={{ flex: 1 }}>
-          <CCMainButton text="Secondary" type="outline" size={CCButtonSizesEnum.small} onPress={fn()} />
+          <CCMainButton text="Secondary" type="secondary" size={CCButtonSizesEnum.small} onPress={fn()} />
         </View>
         <View style={{ flex: 1, opacity: 0.5 }}>
-          <CCMainButton text="Disabled" type="outline" size={CCButtonSizesEnum.small} disabled onPress={fn()} />
+          <CCMainButton text="Disabled" type="secondary" size={CCButtonSizesEnum.small} disabled onPress={fn()} />
         </View>
       </SizeRow>
     </Col>
@@ -128,6 +128,30 @@ export const Round: StoryObj = {
         <RoundLabel>Small</RoundLabel>
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} />
         <CCRoundButton type="primary" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} disabled />
+      </View>
+    </Col>
+  ),
+};
+
+// ─── Round · Neutral (e.g. back button) ──────────────────────────────────────
+
+export const RoundNeutral: StoryObj = {
+  render: () => (
+    <Col>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <RoundLabel>Large</RoundLabel>
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.large} icon={icons.arrow} onPress={fn()} />
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.large} icon={icons.arrow} onPress={fn()} disabled />
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <RoundLabel>Medium</RoundLabel>
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.medium} icon={icons.arrow} onPress={fn()} />
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.medium} icon={icons.arrow} onPress={fn()} disabled />
+      </View>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+        <RoundLabel>Small</RoundLabel>
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} />
+        <CCRoundButton type="neutral" size={CCRoundButtonSizesEnum.small} icon={icons.arrow} onPress={fn()} disabled />
       </View>
     </Col>
   ),

@@ -23,6 +23,7 @@ export enum CCMainButtonTypes {
   outlineDark = 'outline-dark',
   outlineError = 'outline-error',
   white = 'white',
+  secondary = 'secondary',
 }
 
 export enum CCButtonSizesEnum {

@@ -82,6 +82,13 @@ export interface ColorSchema extends BaseColors {
     whiteBorder:                  ThemeColor;
     whitePressedBorder:           ThemeColor;
     whiteText:                    ThemeColor;
+    secondaryBg:                  ThemeColor;
+    secondaryPressedBg:           ThemeColor;
+    secondaryDisabledBg:          ThemeColor;
+    secondaryBorder:              ThemeColor;
+    secondaryPressedBorder:       ThemeColor;
+    secondaryText:                ThemeColor;
+    secondaryTextDisabled:        ThemeColor;
     loadingIndicator:             ThemeColor;
   };
   roundButton: {
@@ -106,6 +113,11 @@ export interface ColorSchema extends BaseColors {
     outlinedDarkDisabledBg:       ThemeColor;
     outlinedDarkDisabledBorder:   string;
     outlinedDarkIcon:             ThemeColor;
+    neutralBg:                    ThemeColor;
+    neutralBorder:                ThemeColor;
+    neutralDisabledBg:            ThemeColor;
+    neutralDisabledBorder:        ThemeColor;
+    neutralIcon:                  ThemeColor;
   };
   input: {
     background:     ThemeColor;

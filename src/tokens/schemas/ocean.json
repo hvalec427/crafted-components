@@ -65,6 +65,13 @@
     "whiteBorder": "$surface",
     "whitePressedBorder": "$border",
     "whiteText": "$text",
+    "secondaryBg": "$border",
+    "secondaryPressedBg": "$text12",
+    "secondaryDisabledBg": "$border",
+    "secondaryBorder": "$border",
+    "secondaryPressedBorder": "$text12",
+    "secondaryText": "$text99",
+    "secondaryTextDisabled": "$text4D",
     "loadingIndicator": "$surface"
   },
   "roundButton": {
@@ -88,7 +95,12 @@
     "outlinedDarkBorder": "$textC7",
     "outlinedDarkDisabledBg": "$text38",
     "outlinedDarkDisabledBorder": "$text38",
-    "outlinedDarkIcon": "$textC7"
+    "outlinedDarkIcon": "$textC7",
+    "neutralBg": "$border",
+    "neutralBorder": "$border",
+    "neutralDisabledBg": "$border",
+    "neutralDisabledBorder": "$border",
+    "neutralIcon": "$text"
   },
   "input": {
     "background": "$surface",
