@@ -9,6 +9,7 @@
   "exclude": [
     "node_modules",
     "lib",
+    "**/__tests__/**",
     "**/*.stories.*",
     "**/*.spec.*",
     "**/*.test.*"
