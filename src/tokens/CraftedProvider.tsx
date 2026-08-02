@@ -8,11 +8,14 @@ import { AssetProvider } from './AssetContext';
 import { assetStore } from './assetStore';
 import { CCPopupHost } from '../components/CCPopup/CCPopupHost';
 import { CCAlertBannerHost } from '../components/CCAlertBanner/CCAlertBannerHost';
+import { CCToastHost } from '../components/CCToast/CCToastHost';
 
 interface CraftedProviderProps {
   children: React.ReactNode;
   /** topOffset passed to the alert banner host */
   alertBannerTopOffset?: number;
+  /** bottomOffset passed to the toast host */
+  toastBottomOffset?: number;
   /** Whether tapping the backdrop dismisses the popup. Default true. */
   popupDismissOnBackdrop?: boolean;
 }
@@ -20,6 +23,7 @@ interface CraftedProviderProps {
 export const CraftedProvider = ({
   children,
   alertBannerTopOffset = 0,
+  toastBottomOffset = 0,
   popupDismissOnBackdrop = true,
 }: CraftedProviderProps) => {
   const [schema, setSchema] = useState<ColorSchema>(schemaStore.getSchema());
@@ -33,6 +37,7 @@ export const CraftedProvider = ({
       <AssetProvider assets={assets}>
         <CCPopupHost dismissOnBackdrop={popupDismissOnBackdrop} />
         <CCAlertBannerHost topOffset={alertBannerTopOffset} />
+        <CCToastHost bottomOffset={toastBottomOffset} />
         {children}
       </AssetProvider>
     </ColorSchemaProvider>
