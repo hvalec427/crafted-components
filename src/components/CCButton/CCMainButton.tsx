@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Animated, Pressable, StyleSheet } from 'react-native';
+import { Animated, Pressable, StyleSheet, View } from 'react-native';
 
 import { ActivityIndicator } from 'react-native';
 import { CCText } from '../CCText/CCText';
@@ -11,6 +11,7 @@ import {
   makeMainButtonColors,
   makeMainButtonStyle,
   CCMainButtonConstants,
+  CCMainButtonShadowConstants,
 } from './CCMainButtonStyle';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
@@ -27,7 +28,6 @@ export enum CCMainButtonTypes {
 }
 
 export enum CCButtonSizesEnum {
-  small = 'small',
   medium = 'medium',
   large = 'large',
 }
@@ -54,10 +54,20 @@ export interface CCMainButtonProps {
 }
 
 const layoutStyle = StyleSheet.create({
+  outer: {
+    position: 'relative',
+  },
+  shadowLayer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+  },
   wrapper: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
   },
   loadingIndicatorAndTextWrapper: {},
   loadingIndicatorAndTextWrapperHidden: {
@@ -129,6 +139,14 @@ export const CCMainButton = (props: CCMainButtonProps) => {
 
   const currentHitSlop = { top: 0, bottom: 0, left: 0, right: 0 };
 
+  const faceHeight = CCMainButtonConstants[size]?.height;
+  const borderRadius = CCMainButtonConstants[size]?.borderRadius;
+  // Only the primary type gets the elevated "pressed-3D" treatment; other
+  // types render flat (restDepth 0 collapses the shadow layer under the face).
+  const isPrimary = type === CCMainButtonTypes.primary;
+  const restDepth = isPrimary ? CCMainButtonShadowConstants.restDepth : 0;
+  const pressedDepth = isPrimary ? CCMainButtonShadowConstants.pressedDepth : 0;
+
   const onButtonPress = () => {
     if (disabled && onPressWhenDisabled) {
       onPressWhenDisabled();
@@ -139,31 +157,51 @@ export const CCMainButton = (props: CCMainButtonProps) => {
 
   return (
     <>
-      <Pressable
-        testID={id}
-        id={id}
-        disabled={(disabled && !onPressWhenDisabled) || loading}
-        hitSlop={currentHitSlop}
-        // @ts-ignore: Unreachable code error
-        style={({ pressed }) => {
-          const isPressed = pressed && !!onPress && !disabled;
+      {/* @ts-ignore: flex/flexGrow/flexShrink accept string values (e.g. '1') same as upstream Pressable usage */}
+      <View
+        style={[
+          layoutStyle.outer,
+          { height: faceHeight + restDepth },
+          flex !== 0 && { flex },
+          flexGrow !== 0 && { flexGrow },
+          flexShrink !== 0 && { flexShrink },
+        ]}>
+        {restDepth > 0 && (
+          <View
+            style={[
+              layoutStyle.shadowLayer,
+              {
+                top: restDepth,
+                height: faceHeight,
+                borderRadius,
+                backgroundColor: theme.button.primaryDark,
+              },
+            ]}
+          />
+        )}
+        <Pressable
+          testID={id}
+          id={id}
+          disabled={(disabled && !onPressWhenDisabled) || loading}
+          hitSlop={currentHitSlop}
+          // @ts-ignore: Unreachable code error
+          style={({ pressed }) => {
+            const isPressed = pressed && !!onPress && !disabled;
 
-          return [
-            layoutStyle.wrapper,
-            {
-              height: CCMainButtonConstants[size]?.height,
-              minHeight: CCMainButtonConstants[size]?.height,
-            },
-            flex !== 0 && { flex },
-            flexGrow !== 0 && { flexGrow },
-            flexShrink !== 0 && { flexShrink },
-            CCMainButtonStyle[`${type}Wrapper`],
-            isPressed && CCMainButtonStyle[`${type}PressedWrapper`],
-            (disabled || loading) && CCMainButtonStyle[`${type}DisabledWrapper`],
-          ];
-        }}
-        onPress={onButtonPress}>
-        {({ pressed }) => {
+            return [
+              layoutStyle.wrapper,
+              {
+                top: isPressed ? restDepth - pressedDepth : 0,
+                height: faceHeight,
+                borderRadius,
+              },
+              CCMainButtonStyle[`${type}Wrapper`],
+              isPressed && CCMainButtonStyle[`${type}PressedWrapper`],
+              (disabled || loading) && CCMainButtonStyle[`${type}DisabledWrapper`],
+            ];
+          }}
+          onPress={onButtonPress}>
+          {({ pressed }) => {
           const isPressed = pressed && !!onPress && !disabled;
 
           let tintColor = CCMainButtonColorsConstants[type]?.mainTextColor;
@@ -241,7 +279,8 @@ export const CCMainButton = (props: CCMainButtonProps) => {
             </>
           );
         }}
-      </Pressable>
+        </Pressable>
+      </View>
     </>
   );
 };

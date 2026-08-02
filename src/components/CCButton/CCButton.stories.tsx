@@ -59,14 +59,6 @@ export const Primary: StoryObj = {
           <CCMainButton text="Disabled" type="primary" size={CCButtonSizesEnum.medium} disabled onPress={fn()} />
         </View>
       </SizeRow>
-      <SizeRow label="Small">
-        <View style={{ flex: 1 }}>
-          <CCMainButton text="Primary" type="primary" size={CCButtonSizesEnum.small} onPress={fn()} />
-        </View>
-        <View style={{ flex: 1, opacity: 0.5 }}>
-          <CCMainButton text="Disabled" type="primary" size={CCButtonSizesEnum.small} disabled onPress={fn()} />
-        </View>
-      </SizeRow>
     </Col>
   ),
 };
@@ -90,14 +82,6 @@ export const Secondary: StoryObj = {
         </View>
         <View style={{ flex: 1, opacity: 0.5 }}>
           <CCMainButton text="Disabled" type="secondary" size={CCButtonSizesEnum.medium} disabled onPress={fn()} />
-        </View>
-      </SizeRow>
-      <SizeRow label="Small">
-        <View style={{ flex: 1 }}>
-          <CCMainButton text="Secondary" type="secondary" size={CCButtonSizesEnum.small} onPress={fn()} />
-        </View>
-        <View style={{ flex: 1, opacity: 0.5 }}>
-          <CCMainButton text="Disabled" type="secondary" size={CCButtonSizesEnum.small} disabled onPress={fn()} />
         </View>
       </SizeRow>
     </Col>

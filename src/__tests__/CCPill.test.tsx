@@ -35,16 +35,6 @@ describe('CCPill', () => {
     await expect(fireEvent.press(getByText('No handler'))).resolves.not.toThrow();
   });
 
-  it('renders with small size', async () => {
-    const { getByText } = await renderWithTheme(<CCPill label="Small" size="small" />);
-    expect(getByText('Small')).toBeTruthy();
-  });
-
-  it('renders with large size (default)', async () => {
-    const { getByText } = await renderWithTheme(<CCPill label="Large" size="large" />);
-    expect(getByText('Large')).toBeTruthy();
-  });
-
   it('renders in active state without crashing', async () => {
     const { getByText } = await renderWithTheme(<CCPill label="Active" active />);
     expect(getByText('Active')).toBeTruthy();

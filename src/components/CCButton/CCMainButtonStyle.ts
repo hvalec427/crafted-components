@@ -1,11 +1,21 @@
 import type { ColorSchema } from '../../tokens/colorSchema';
 
 export const CCMainButtonConstants: {
-  [key in string]: { height: number; paddingHorizontal: number };
+  [key in string]: { height: number; paddingHorizontal: number; borderRadius: number };
 } = {
-  small:  { height: 30, paddingHorizontal: 12 },
-  medium: { height: 48, paddingHorizontal: 12 },
-  large:  { height: 54, paddingHorizontal: 16 },
+  medium: { height: 48, paddingHorizontal: 12, borderRadius: 5 },
+  large:  { height: 54, paddingHorizontal: 16, borderRadius: 5 },
+};
+
+/**
+ * Offset "pressed-3D" shadow for the primary button (rest depth → depth on
+ * press). Zero by default so consumers who don't opt in via
+ * `initCraftedComponents({ components: { CCMainButton: { shadow } } })` see
+ * no layout/visual change.
+ */
+export const CCMainButtonShadowConstants: { restDepth: number; pressedDepth: number } = {
+  restDepth: 0,
+  pressedDepth: 0,
 };
 
 export const makeMainButtonColors = (theme: ColorSchema) => {
@@ -63,7 +73,7 @@ export const makeMainButtonStyle = (theme: ColorSchema): Record<string, object> 
   const colors = theme.button;
   return {
     primaryWrapper:         { backgroundColor: colors.primaryBg,             borderColor: colors.primaryBorder,             borderWidth: 1 },
-    primaryPressedWrapper:  { backgroundColor: colors.primaryPressedBg,      borderColor: colors.primaryPressedBg },
+    primaryPressedWrapper:  { backgroundColor: colors.primaryLight,         borderColor: colors.primaryLight },
     primaryDisabledWrapper: { backgroundColor: colors.primaryDisabledBg,     borderColor: colors.primaryDisabledBg },
     primaryWrapperProgress: { backgroundColor: colors.primaryPressedBg },
     primaryText:            { color: colors.primaryText },

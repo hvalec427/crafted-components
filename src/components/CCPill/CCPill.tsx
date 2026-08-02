@@ -3,13 +3,10 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import { useTheme } from '../../tokens/ColorSchemaContext';
 import { typography } from '../../tokens/typography';
 
-export type CCPillSize = 'small' | 'large';
-
 export interface CCPillProps {
   label: string;
   active?: boolean;
   onPress?: () => void;
-  size?: CCPillSize;
   disabled?: boolean;
   id?: string;
 }
@@ -22,15 +19,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const sizes: Record<CCPillSize, { height: number; paddingHorizontal: number; borderRadius: number }> = {
-  small:  { height: 28, paddingHorizontal: 12, borderRadius: 14 },
-  large:  { height: 40, paddingHorizontal: 18, borderRadius: 20 },
+export const CCPillConstants: { height: number; paddingHorizontal: number; borderRadius: number } = {
+  height: 40, paddingHorizontal: 18, borderRadius: 20,
 };
 
-export const CCPill = ({ label, active = false, onPress, size = 'large', disabled = false, id }: CCPillProps) => {
+export const CCPill = ({ label, active = false, onPress, disabled = false, id }: CCPillProps) => {
   const theme = useTheme();
-  const s = sizes[size];
-  const textStyle = size === 'small' ? typography.label : typography.labelLarge;
+  const textStyle = typography.labelLarge;
 
   return (
     <Pressable
@@ -40,9 +35,9 @@ export const CCPill = ({ label, active = false, onPress, size = 'large', disable
       style={({ pressed }) => [
         styles.base,
         {
-          height: s.height,
-          paddingHorizontal: s.paddingHorizontal,
-          borderRadius: s.borderRadius,
+          height: CCPillConstants.height,
+          paddingHorizontal: CCPillConstants.paddingHorizontal,
+          borderRadius: CCPillConstants.borderRadius,
           backgroundColor: active
             ? theme.primary
             : theme.surface,

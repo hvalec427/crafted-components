@@ -1,2 +1,2 @@
-export { CCPill } from './CCPill';
-export type { CCPillProps, CCPillSize } from './CCPill';
+export { CCPill, CCPillConstants } from './CCPill';
+export type { CCPillProps } from './CCPill';

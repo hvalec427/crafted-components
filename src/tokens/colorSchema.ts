@@ -31,6 +31,10 @@ export interface ColorSchema extends BaseColors {
     primaryPressedBg:             ThemeColor;
     primaryDisabledBg:            ThemeColor;
     primaryBorder:                ThemeColor;
+    /** Opaque, darkened primary — used as the offset shadow layer under the primary button (see CCMainButton). */
+    primaryDark:                  ThemeColor;
+    /** Opaque, lightly-darkened primary — pressed-state background for the primary button (see CCMainButtonStyle); unlike primaryPressedBg, has no alpha. */
+    primaryLight:                 ThemeColor;
     primaryText:                  ThemeColor;
     primaryTextDisabled:          ThemeColor;
     primaryLightBg:               ThemeColor;

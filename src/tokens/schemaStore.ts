@@ -1,11 +1,12 @@
 import type { CCIconSource, CCImageSource } from '../utils/CCImageSource';
-import type { ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
+import type { ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema, ThemeColor } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
 import type { PopupRegistration, TypedShowPopup } from '../components/CCPopup/popupService';
 import { popupStore, showPopup as _showPopup, hidePopup as _hidePopup } from '../components/CCPopup/popupService';
-import { CCMainButtonConstants } from '../components/CCButton/CCMainButtonStyle';
+import { CCMainButtonConstants, CCMainButtonShadowConstants } from '../components/CCButton/CCMainButtonStyle';
 import { CCBoxConstants } from '../components/CCBox/CCBoxConstants';
+import { CCPillConstants } from '../components/CCPill/CCPill';
 import { initCraftedAssets } from './assetStore';
 import { useAssets as _useAssets } from './AssetContext';
 import { useTheme as _useTheme } from './ColorSchemaContext';
@@ -17,6 +18,13 @@ import sunsetSchema from './schemas/sunset.json';
 // Base color keys, longest first to avoid prefix-matching ambiguity
 const BASE_KEYS = ['background', 'secondary', 'primary', 'surface', 'success', 'warning', 'border', 'error', 'info', 'text'] as const;
 const HEX2 = /^[0-9A-Fa-f]{2}$/;
+
+/** Multiplicatively darkens a `#RRGGBB` color by `amount` (0–1). Used to derive the primary button's shadow color without requiring a dedicated theme token. */
+function darken(hex: string, amount: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const channel = (shift: number) => Math.round(((n >> shift) & 0xff) * (1 - amount));
+  return '#' + [16, 8, 0].map(shift => channel(shift).toString(16).padStart(2, '0')).join('').toUpperCase();
+}
 
 function resolveTokens(raw: Record<string, unknown>): ColorSchema {
   const base = Object.fromEntries(BASE_KEYS.map(k => [k, raw[k] as string]));
@@ -39,7 +47,13 @@ function resolveTokens(raw: Record<string, unknown>): ColorSchema {
     return v;
   }
 
-  return resolve(raw) as ColorSchema;
+  const resolved = resolve(raw) as ColorSchema;
+  resolved.button.primaryDark = darken(resolved.primary, 0.3) as ThemeColor;
+  // Opaque (unlike primaryPressedBg, which is a translucent $primaryD1 tint) —
+  // the primary button's pressed face sits directly over the solid shadow
+  // layer, so a translucent background would let the shadow show through it.
+  resolved.button.primaryLight = darken(resolved.primary, 0.15) as ThemeColor;
+  return resolved;
 }
 
 function deepMerge(base: Record<string, unknown>, overrides: Record<string, unknown>): Record<string, unknown> {
@@ -109,15 +123,23 @@ export function initCraftedComponents<
 
   if (components?.CCMainButton?.sizes) {
     const sizes = components.CCMainButton.sizes;
-    for (const [size, overrides] of Object.entries(sizes) as [string, { height?: number; paddingHorizontal?: number }][]) {
+    for (const [size, overrides] of Object.entries(sizes) as [string, { height?: number; paddingHorizontal?: number; borderRadius?: number }][]) {
       if (CCMainButtonConstants[size]) {
         Object.assign(CCMainButtonConstants[size], overrides);
       }
     }
   }
 
+  if (components?.CCMainButton?.shadow) {
+    Object.assign(CCMainButtonShadowConstants, components.CCMainButton.shadow);
+  }
+
   if (components?.CCBox?.borderRadius) {
     Object.assign(CCBoxConstants.borderRadius, components.CCBox.borderRadius);
+  }
+
+  if (components?.CCPill) {
+    Object.assign(CCPillConstants, components.CCPill);
   }
 
   if (components?.typography) {

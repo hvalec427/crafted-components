@@ -2,7 +2,7 @@ export { CCMainButton } from './CCMainButton';
 export type { CCMainButtonProps } from './CCMainButton';
 export { CCMainButtonTypes, CCButtonSizesEnum } from './CCMainButton';
 
-export { makeMainButtonStyle, makeMainButtonColors, CCMainButtonConstants } from './CCMainButtonStyle';
+export { makeMainButtonStyle, makeMainButtonColors, CCMainButtonConstants, CCMainButtonShadowConstants } from './CCMainButtonStyle';
 
 export { CCRoundButton } from './CCRoundButton';
 export { CCRoundButtonTypes, CCRoundButtonSizesEnum } from './CCRoundButton';
