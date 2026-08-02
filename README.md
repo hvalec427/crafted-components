@@ -55,15 +55,26 @@ initCraftedComponents({
   icons: {
     arrow: require('./assets/icons/arrow.png'),
     close: 'https://cdn.example.com/icons/close.png',
+    // Vector icons (e.g. react-native-svg components) work too — CCIcon
+    // renders them directly instead of through <Image>, and `tintColor`
+    // is passed through as their `color` prop.
+    star: StarIcon,
   },
   images: {
     logo: require('./assets/images/logo.png'),
     hero: 'https://cdn.example.com/images/hero.jpg',
   },
+  components: {
+    // Per-token style overrides, merged into the shared `typography` object.
+    typography: {
+      displayLarge: { fontFamily: 'YourDisplayFont-Bold' },
+      body: { fontFamily: 'YourBodyFont-Regular' },
+    },
+  },
 });
 ```
 
-Color tokens (button states, input borders, header colors, etc.) are automatically derived from the base colors you provide. Icon and image values are `CCImageSource` — either a local `require()` result or a remote URL string.
+Color tokens (button states, input borders, header colors, etc.) are automatically derived from the base colors you provide. Icon values are `CCIconSource` — a local `require()` result, a remote URL string, or a vector icon component; image values are `CCImageSource` (`require()` result or URL string).
 
 ### Using registered assets
 

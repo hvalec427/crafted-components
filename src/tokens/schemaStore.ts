@@ -1,4 +1,4 @@
-import type { CCImageSource } from '../utils/CCImageSource';
+import type { CCIconSource, CCImageSource } from '../utils/CCImageSource';
 import type { ColorSchema, ColorSchemaName, DeepPartial, ExtraColors, RawColorSchema } from './colorSchema';
 import type { BuiltInIcons, BuiltInImages } from './assetSchema';
 import type { ComponentSchema } from './componentSchema';
@@ -9,6 +9,7 @@ import { CCBoxConstants } from '../components/CCBox/CCBoxConstants';
 import { initCraftedAssets } from './assetStore';
 import { useAssets as _useAssets } from './AssetContext';
 import { useTheme as _useTheme } from './ColorSchemaContext';
+import { typography } from './typography';
 import defaultSchema from './schemas/default.json';
 import oceanSchema from './schemas/ocean.json';
 import sunsetSchema from './schemas/sunset.json';
@@ -80,7 +81,7 @@ export const schemaStore = {
 };
 
 export function initCraftedComponents<
-  TIcons extends Record<string, CCImageSource> = Record<never, never>,
+  TIcons extends Record<string, CCIconSource> = Record<never, never>,
   TImages extends Record<string, CCImageSource> = Record<never, never>,
   TColors extends DeepPartial<RawColorSchema> = Record<never, never>,
   TPopups extends PopupRegistration = Record<never, never>
@@ -117,6 +118,14 @@ export function initCraftedComponents<
 
   if (components?.CCBox?.borderRadius) {
     Object.assign(CCBoxConstants.borderRadius, components.CCBox.borderRadius);
+  }
+
+  if (components?.typography) {
+    for (const [key, overrides] of Object.entries(components.typography)) {
+      if (typography[key as keyof typeof typography]) {
+        Object.assign(typography[key as keyof typeof typography], overrides);
+      }
+    }
   }
 
   if (popups) {

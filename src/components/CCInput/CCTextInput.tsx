@@ -154,15 +154,6 @@ const style = StyleSheet.create({
   wrapper: {
     gap: 4,
   },
-  label: {
-    ...typography.label,
-  },
-  labelRegular: {
-    ...typography.body,
-  },
-  labelHighlighted: {
-    ...typography.labelLarge,
-  },
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -227,7 +218,6 @@ const style = StyleSheet.create({
     marginBottom: 34,
   },
   inputField: {
-    ...typography.body,
     zIndex: 5,
     textAlignVertical: 'top',
     height: '100%',
@@ -247,15 +237,10 @@ const style = StyleSheet.create({
   inputFieldMultilineAndroid: {
     marginVertical: 0,
   },
-  instructions: {
-    ...typography.caption,
-  },
   error: {
-    ...typography.caption,
     fontWeight: '600',
   },
   warning: {
-    ...typography.caption,
     fontWeight: '600',
   },
   placeholderLabelWrapper: {
@@ -263,9 +248,6 @@ const style = StyleSheet.create({
   },
   placeholderMultilineIos: {
     marginBottom: 3,
-  },
-  placeholderLabel: {
-    ...typography.caption,
   },
   errorWarningContainer: {
     minHeight: 16,
@@ -502,15 +484,15 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
         {label ? (
           <Text
             style={[
-              style.label,
-              labelType === 'regular' && style.labelRegular,
-              labelType === 'highlighted' && style.labelHighlighted,
+              typography.label,
+              labelType === 'regular' && typography.body,
+              labelType === 'highlighted' && typography.labelLarge,
             ]}>
             {label}
           </Text>
         ) : null}
         {instructions && instructionsPosition === 'top' ? (
-          <Text style={[style.instructions, { color: neutral.darkGray }]}>{instructions}</Text>
+          <Text style={[typography.caption, { color: neutral.darkGray }]}>{instructions}</Text>
         ) : null}
 
         <CCPressableOpacity
@@ -543,7 +525,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                   multiline && !isAndroid && style.placeholderMultilineIos,
                   { transform: [{ translateY: placeholderY }] },
                 ]}>
-                <Text numberOfLines={1} style={[style.placeholderLabel, { color: neutral.darkGray }]}>
+                <Text numberOfLines={1} style={[typography.caption, { color: neutral.darkGray }]}>
                   {placeholderLabel}
                 </Text>
               </Animated.View>
@@ -603,6 +585,7 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
                 textAlign={textAlign}
                 style={[
                   style.inputField,
+                  typography.body,
                   { color: editable ? colors.text : colors.textDisabled },
                   !multiline && style.inputFieldSingleLine,
                   textType === 'bold' && style.inputFieldBold,
@@ -669,12 +652,12 @@ export const CCTextInput = forwardRef<CCTextInputRef, CCTextInputProps>(
         </CCPressableOpacity>
 
         <View style={style.errorWarningContainer}>
-          {error ? <Text style={[style.error, { color: colors.errorText }]}>{error}</Text> : null}
-          {warning ? <Text style={[style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
+          {error ? <Text style={[typography.caption, style.error, { color: colors.errorText }]}>{error}</Text> : null}
+          {warning ? <Text style={[typography.caption, style.warning, { color: neutral.darkGray }]}>{warning}</Text> : null}
         </View>
 
         {instructions && instructionsPosition === 'bottom' ? (
-          <Text style={[style.instructions, { color: neutral.darkGray }]}>{instructions}</Text>
+          <Text style={[typography.caption, { color: neutral.darkGray }]}>{instructions}</Text>
         ) : null}
       </View>
     );

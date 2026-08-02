@@ -7,11 +7,11 @@ import {
   StyleProp,
 } from 'react-native';
 
-import { CCImageSource, normalizeCCImageSource } from '../../utils/CCImageSource';
+import { CCIconSource, isCCVectorIconComponent, normalizeCCImageSource } from '../../utils/CCImageSource';
 import type { ThemeColor } from '../../tokens/colorSchema';
 
 export interface CCIconProps {
-  source: CCImageSource;
+  source: CCIconSource;
   width?: DimensionValue;
   height?: DimensionValue;
   resizeMode?: ImageResizeMode;
@@ -26,15 +26,28 @@ export const CCIcon = ({
   resizeMode = 'contain',
   tintColor,
   style,
-}: CCIconProps) => (
-  <Image
-    resizeMode={resizeMode}
-    source={normalizeCCImageSource(source)}
-    style={[
-      tintColor ? { tintColor } : {},
-      width ? { width } : {},
-      height ? { height } : {},
-      style,
-    ]}
-  />
-);
+}: CCIconProps) => {
+  if (isCCVectorIconComponent(source)) {
+    const VectorIcon = source;
+    return (
+      <VectorIcon
+        width={typeof width === 'number' ? width : undefined}
+        height={typeof height === 'number' ? height : undefined}
+        color={tintColor}
+      />
+    );
+  }
+
+  return (
+    <Image
+      resizeMode={resizeMode}
+      source={normalizeCCImageSource(source)}
+      style={[
+        tintColor ? { tintColor } : {},
+        width ? { width } : {},
+        height ? { height } : {},
+        style,
+      ]}
+    />
+  );
+};

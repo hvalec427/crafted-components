@@ -1,12 +1,12 @@
-import { CCImageSource } from '../utils/CCImageSource';
+import { CCIconSource, CCImageSource } from '../utils/CCImageSource';
 
 export interface BuiltInIcons {
-  arrow: CCImageSource;
+  arrow: CCIconSource;
 }
 
 export interface BuiltInImages {}
 
 export interface AssetSchema {
-  icons: BuiltInIcons & Record<string, CCImageSource>;
+  icons: BuiltInIcons & Record<string, CCIconSource>;
   images: BuiltInImages & Record<string, CCImageSource>;
 }
