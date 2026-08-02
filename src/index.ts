@@ -34,6 +34,8 @@ export * from './components/CCDetailRow';
 export * from './components/CCStepDots';
 export * from './components/CCBarChart';
 export * from './components/CCSegmentedStrip';
+export * from './components/CCProgressBar';
+export * from './components/CCProgressRing';
 
 // Utils
 export { testProps } from './utils/CCTestingId';
