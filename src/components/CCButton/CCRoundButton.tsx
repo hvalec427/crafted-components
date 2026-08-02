@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
-import { ImageSourcePropType, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 
 import { CCIcon } from '../CCIcon/CCIcon';
 import { CCPressableOpacity } from '../CCPressable/CCPressableOpacity';
 import { testProps } from '../../utils/CCTestingId';
 import { useTheme } from '../../tokens/ColorSchemaContext';
+import type { CCIconSource } from '../../utils/CCImageSource';
 
 import { RoundButtonSizes, makeRoundButtonStyle } from './CCRoundButtonStyle';
 
@@ -39,7 +40,7 @@ export enum CCRoundButtonSizesEnum {
 interface CCRoundButtonProps {
   onPress: (() => void) | undefined;
   type: keyof typeof CCRoundButtonTypes;
-  icon?: ImageSourcePropType;
+  icon?: CCIconSource;
   style?: ViewStyle;
   size?: CCRoundButtonSizesEnum;
   disabled?: boolean;
